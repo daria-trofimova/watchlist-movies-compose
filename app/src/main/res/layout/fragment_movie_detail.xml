@@ -26,6 +26,14 @@
             android:contentDescription="@string/movie_poster"
             app:srcCompat="@android:drawable/ic_menu_report_image" />
 
+        <ImageButton
+            android:id="@+id/button_favorite"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/favorite" />
+
         <TextView
             android:id="@+id/text_title"
             android:layout_width="match_parent"
@@ -47,10 +55,5 @@
             android:textAlignment="center"
             tools:text="4.0" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/favorite" />
     </LinearLayout>
 </ScrollView>

@@ -11,6 +11,6 @@ class FavoritesViewModel : ViewModel() {
 }
 
 private val mockMovies = listOf(
-    Movie(id = "2", title = "Titanic 2", rating = 2.2f, posterLink = ""),
-    Movie(id = "3", title = "Titanic 3", rating = 3.2f, posterLink = "")
+    Movie(id = "2", title = "Titanic 2", rating = 2.2f, posterLink = "", isFavorite = true),
+    Movie(id = "3", title = "Titanic 3", rating = 3.2f, posterLink = "", isFavorite = true)
 )
