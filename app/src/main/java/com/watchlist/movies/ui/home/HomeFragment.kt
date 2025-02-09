@@ -2,7 +2,6 @@ package com.watchlist.movies.ui.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -40,9 +39,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), OnItemClickListener<Movie
     }
 
     override fun onItemClick(item: Movie) {
-        val id = item.id
-        // TODO: replace with safeargs
-        val bundle = bundleOf("id" to id)
-        findNavController().navigate(R.id.action_home_to_movie_detail, bundle)
+        val action = HomeFragmentDirections.actionHomeToMovieDetail(item.id)
+        findNavController().navigate(action)
     }
 }

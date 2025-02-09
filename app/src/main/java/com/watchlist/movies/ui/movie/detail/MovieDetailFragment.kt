@@ -21,9 +21,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO: replace with safeargs
-        val id = savedInstanceState?.getString("id")
-
         setupToolbar()
         val titleTextView = view.findViewById<TextView>(R.id.text_title)
         val ratingTextView = view.findViewById<TextView>(R.id.text_rating)
@@ -35,7 +32,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.movie.collect { movie ->
                     titleTextView.text = movie.title
-                    ratingTextView.text = movie.rating.toString()
+                    ratingTextView.text = movie.rating.toString() // TODO: format
                     val favoriteButtonRes =
                         if (movie.isFavorite) R.drawable.favorite_fill else R.drawable.favorite
                     favoriteButton.setImageResource(favoriteButtonRes)
