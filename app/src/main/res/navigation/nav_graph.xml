@@ -10,7 +10,7 @@
         android:label="Home">
         <action
             android:id="@+id/action_home_to_movie_detail"
-            app:destination="@+id/movie_detail"></action>
+            app:destination="@+id/movie_detail" />
     </fragment>
     <fragment
         android:id="@+id/favorites"
@@ -18,7 +18,7 @@
         android:label="Favorites">
         <action
             android:id="@+id/action_favorites_to_movie_detail"
-            app:destination="@+id/movie_detail"></action>
+            app:destination="@+id/movie_detail" />
     </fragment>
     <fragment
         android:id="@+id/movie_detail"
