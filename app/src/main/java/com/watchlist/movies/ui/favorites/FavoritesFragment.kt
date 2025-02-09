@@ -1,4 +1,4 @@
-package com.watchlist.movies.ui
+package com.watchlist.movies.ui.favorites
 
 import android.os.Bundle
 import android.view.View
@@ -11,6 +11,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.watchlist.movies.R
+import com.watchlist.movies.ui.Movie
+import com.watchlist.movies.ui.MovieAdapter
+import com.watchlist.movies.ui.OnItemClickListener
 import kotlinx.coroutines.launch
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites), OnItemClickListener<Movie> {

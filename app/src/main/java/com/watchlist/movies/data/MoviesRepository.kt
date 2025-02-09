@@ -1,13 +1,15 @@
-package com.watchlist.movies.ui
+package com.watchlist.movies.data
 
-import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+class MoviesRepository @Inject constructor(
+    private val localDataSource: MoviesLocalDataSource,
+    private val remoteDataSource: MoviesRemoteDataSource,
+) {
 
-    private val _movies: MutableStateFlow<List<Movie>> = MutableStateFlow(mockMovies)
-    val movies: StateFlow<List<Movie>> = _movies
+    val movies: Flow<List<Movie>> = flowOf(mockMovies)
 }
 
 private val mockMovies = listOf(

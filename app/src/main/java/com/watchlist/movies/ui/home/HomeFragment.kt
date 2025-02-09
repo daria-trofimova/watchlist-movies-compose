@@ -1,4 +1,4 @@
-package com.watchlist.movies.ui
+package com.watchlist.movies.ui.home
 
 import android.os.Bundle
 import android.view.View
@@ -11,11 +11,16 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.watchlist.movies.R
+import com.watchlist.movies.ui.Movie
+import com.watchlist.movies.ui.MovieAdapter
+import com.watchlist.movies.ui.OnItemClickListener
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home), OnItemClickListener<Movie> {
 
-    private val viewModel by viewModels<HomeViewModel>()
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -1,6 +1,7 @@
-package com.watchlist.movies.ui
+package com.watchlist.movies.ui.favorites
 
 import androidx.lifecycle.ViewModel
+import com.watchlist.movies.ui.Movie
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

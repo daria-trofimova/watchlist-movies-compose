@@ -1,4 +1,4 @@
-package com.watchlist.movies.ui
+package com.watchlist.movies.ui.movie.detail
 
 import android.os.Bundle
 import android.view.View
