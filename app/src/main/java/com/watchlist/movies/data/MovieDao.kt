@@ -2,23 +2,24 @@ package com.watchlist.movies.data
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MovieDao {
-    @Insert
-    fun insertAll(movies: List<Movie>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(movies: List<Movie>)
 
-    @Update
-    fun update(movie: Movie)
+    @Query("UPDATE movie SET isFavorite=:isFavorite WHERE id = :id")
+    fun updateFavorite(id: Long, isFavorite: Boolean)
 
     @Query("SELECT * FROM movie")
-    fun loadAll(): List<Movie>
+    fun loadAll(): Flow<List<Movie>>
 
     @Query("SELECT * FROM movie WHERE isFavorite = 1")
-    fun loadAllFavorite(): List<Movie>
+    fun loadAllFavorite(): Flow<List<Movie>>
 
     @Query("SELECT * FROM movie WHERE id = :id")
-    fun loadMovie(id: String): Movie
+    fun loadMovie(id: Long): Flow<Movie>
 }

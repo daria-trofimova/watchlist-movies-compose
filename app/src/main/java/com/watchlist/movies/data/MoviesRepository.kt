@@ -1,7 +1,8 @@
 package com.watchlist.movies.data
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MoviesRepository @Inject constructor(
@@ -9,13 +10,30 @@ class MoviesRepository @Inject constructor(
     private val remoteDataSource: MoviesRemoteDataSource,
 ) {
 
-    val movies: Flow<List<Movie>> = flowOf(mockMovies)
-}
+    val movies: Flow<List<Movie>> = localDataSource.getMovies()
 
-private val mockMovies = listOf(
-    Movie(id = "1", title = "Titanic", rating = 1.2f, posterLink = "", isFavorite = true),
-    Movie(id = "2", title = "Titanic 2", rating = 2.2f, posterLink = "", isFavorite = true),
-    Movie(id = "3", title = "Titanic 3", rating = 3.2f, posterLink = "", isFavorite = false),
-    Movie(id = "4", title = "Titanic 4", rating = 4.2f, posterLink = "", isFavorite = false),
-    Movie(id = "5", title = "Titanic 5", rating = 5.2f, posterLink = "", isFavorite = false)
-)
+    val favoriteMovies: Flow<List<Movie>> = localDataSource.getFavoriteMovies()
+
+    suspend fun fetchMovies() {
+        withContext(Dispatchers.IO) {
+            val movies = remoteDataSource.getMovies()
+            localDataSource.saveMovies(movies.map { Movie.from(it, isFavorite = false) })
+        }
+    }
+
+    suspend fun fetchFavoriteMovies() {
+        withContext(Dispatchers.IO) {
+            val movies = remoteDataSource.getFavoriteMovies()
+            localDataSource.saveMovies(movies.map { Movie.from(it, isFavorite = true) })
+        }
+    }
+
+    fun getMovie(id: Long): Flow<Movie> = localDataSource.getMovie(id)
+
+    suspend fun setFavorite(id: Long, isFavorite: Boolean) {
+        withContext(Dispatchers.IO) {
+            remoteDataSource.setFavorite(id, isFavorite)
+            localDataSource.setFavorite(id, isFavorite)
+        }
+    }
+}

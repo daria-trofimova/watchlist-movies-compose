@@ -23,5 +23,8 @@ class HomeViewModel @Inject constructor(private val moviesRepository: MoviesRepo
                 _movies.emit(movies.map { Movie.from(it) })
             }
         }
+        viewModelScope.launch {
+            moviesRepository.fetchMovies()
+        }
     }
 }

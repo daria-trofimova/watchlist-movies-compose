@@ -9,12 +9,12 @@ plugins {
 
 android {
     namespace = "com.watchlist.movies"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.watchlist.movies"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -53,8 +53,12 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     implementation(libs.squareup.retrofit)
+    implementation(libs.squareup.retrofit.converter.gson)
+    implementation(libs.squareup.okhttp3.logging.interceptor)
     implementation(libs.google.dagger.hilt)
     ksp(libs.google.dagger.hilt.compiler)
+    implementation(libs.io.coil)
+    implementation(libs.io.coil.network.okhttp)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -3,6 +3,7 @@ package com.watchlist.movies.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -15,10 +16,12 @@ class MovieAdapter(private val clickListener: OnItemClickListener<Movie>) :
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val titleTextView: TextView = view.findViewById(R.id.text_title)
         private val ratingTextView: TextView = view.findViewById(R.id.text_rating)
+        private val posterImageView: ImageView = view.findViewById(R.id.image_poster)
 
         fun bind(item: Movie) {
             titleTextView.text = item.title
-            ratingTextView.text = item.rating.toString()
+            ratingTextView.text = item.ratingFormatted
+            posterImageView.loadPoster(item.posterLink)
         }
     }
 

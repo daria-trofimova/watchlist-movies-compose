@@ -8,6 +8,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.watchlist.movies.R
 import com.watchlist.movies.ui.Movie
@@ -26,7 +27,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), OnItemClickListener<Movie
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_movies)
         val adapter = MovieAdapter(this)
         recyclerView.adapter = adapter
-
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
