@@ -27,7 +27,7 @@ object TmdbApiModule {
             val request: Request = chain.request()
                 .newBuilder()
                 .header("Accept", "application/json")
-                .header("Authorization", "Bearer $apiKey")
+                .header("Authorization", "Bearer ${BuildConfig.TMDB_API_KEY}")
                 .build()
             chain.proceed(request)
         }
@@ -44,5 +44,3 @@ object TmdbApiModule {
 
 // TODO: move to a better place
 private const val baseUrl = "https://api.themoviedb.org/3/"
-private const val apiKey =
-    "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYjRlNWM5YmEzMjhiMjQxZGVjYzdjYWQ0ZTZhNzlkMyIsIm5iZiI6MTczOTA0MzI4Mi4wNDksInN1YiI6IjY3YTdiMWQyMTcyOWZmYTFjYWUwNzU1YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.JjVKqap1HPFn37sZHy5m4Qw7T1UFq3zcz2jzcS3B7G8"

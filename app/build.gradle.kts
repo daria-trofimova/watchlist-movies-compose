@@ -19,6 +19,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "TMDB_API_KEY", "\"${System.getenv("tmdb.api.key")}\"")
+        buildConfigField("String", "TMDB_ACCOUNT_ID", "\"${System.getenv("tmdb.account.id")}\"")
     }
 
     buildTypes {
@@ -29,6 +32,9 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
+    buildFeatures {
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
