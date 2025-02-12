@@ -13,11 +13,11 @@ class MoviesLocalDataSource @Inject constructor(private val dao: MovieDao) {
         }
     }
 
-    fun getMovies(): Flow<List<Movie>> = dao.loadAll()
+    fun getMoviesStream(): Flow<List<Movie>> = dao.loadAll()
 
-    fun getFavoriteMovies(): Flow<List<Movie>> = dao.loadAllFavorite()
+    fun getFavoriteMoviesStream(): Flow<List<Movie>> = dao.loadAllFavorite()
 
-    fun getMovie(id: Long): Flow<Movie> = dao.loadMovie(id)
+    fun getMovieStream(id: Long): Flow<Movie> = dao.loadMovie(id)
 
     suspend fun setFavorite(id: Long, isFavorite: Boolean) {
         withContext(Dispatchers.IO) {

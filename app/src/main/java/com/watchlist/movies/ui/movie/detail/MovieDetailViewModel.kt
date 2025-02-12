@@ -23,7 +23,7 @@ class MovieDetailViewModel @Inject constructor(
     init {
         val id = savedState.get<Long>("id")!!
         viewModelScope.launch {
-            moviesRepository.getMovie(id).collect {
+            moviesRepository.getMovieStream(id).collect {
                 _movie.emit(Movie.from(it))
             }
         }

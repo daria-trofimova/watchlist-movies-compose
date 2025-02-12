@@ -10,9 +10,9 @@ class MoviesRepository @Inject constructor(
     private val remoteDataSource: MoviesRemoteDataSource,
 ) {
 
-    val movies: Flow<List<Movie>> = localDataSource.getMovies()
+    val movies: Flow<List<Movie>> = localDataSource.getMoviesStream()
 
-    val favoriteMovies: Flow<List<Movie>> = localDataSource.getFavoriteMovies()
+    val favoriteMovies: Flow<List<Movie>> = localDataSource.getFavoriteMoviesStream()
 
     suspend fun fetchMovies() {
         withContext(Dispatchers.IO) {
@@ -28,7 +28,7 @@ class MoviesRepository @Inject constructor(
         }
     }
 
-    fun getMovie(id: Long): Flow<Movie> = localDataSource.getMovie(id)
+    fun getMovieStream(id: Long): Flow<Movie> = localDataSource.getMovieStream(id)
 
     suspend fun setFavorite(id: Long, isFavorite: Boolean) {
         withContext(Dispatchers.IO) {
