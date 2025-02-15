@@ -30,8 +30,8 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), OnItemClickList
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.movies.collect {
-                    adapter.submitList(it)
+                viewModel.uiState.collect {
+                    adapter.submitList(it.movies)
                 }
             }
 

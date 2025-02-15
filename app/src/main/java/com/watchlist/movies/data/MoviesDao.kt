@@ -7,12 +7,12 @@ import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface MovieDao {
+interface MoviesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(movies: List<Movie>)
 
     @Query("UPDATE movie SET isFavorite=:isFavorite WHERE id = :id")
-    fun updateFavorite(id: Long, isFavorite: Boolean)
+    suspend fun updateFavorite(id: Long, isFavorite: Boolean)
 
     @Query("SELECT * FROM movie")
     fun loadAll(): Flow<List<Movie>>

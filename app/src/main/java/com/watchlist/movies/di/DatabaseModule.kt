@@ -1,9 +1,9 @@
-package com.watchlist.movies
+package com.watchlist.movies.di
 
 import android.app.Application
 import androidx.room.Room
 import com.watchlist.movies.data.AppDatabase
-import com.watchlist.movies.data.MovieDao
+import com.watchlist.movies.data.MoviesDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,5 +22,5 @@ object DatabaseModule {
     ).build()
 
     @Provides
-    fun provideMovieDao(appDatabase: AppDatabase): MovieDao = appDatabase.movieDao()
+    fun provideMoviesDao(appDatabase: AppDatabase): MoviesDao = appDatabase.moviesDao()
 }

@@ -3,7 +3,8 @@ package com.watchlist.movies.ui.movie.detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.watchlist.movies.data.MoviesRepository
+import com.watchlist.movies.domain.GetMovieStreamUseCase
+import com.watchlist.movies.domain.SetFavoriteMovieUseCase
 import com.watchlist.movies.ui.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor(
     savedState: SavedStateHandle,
-    private val moviesRepository: MoviesRepository,
+    private val getMovieStreamUseCase: GetMovieStreamUseCase,
+    private val setFavoriteMovieUseCase: SetFavoriteMovieUseCase,
 ) : ViewModel() {
 
     private val _movie = MutableStateFlow<Movie?>(null)
@@ -23,7 +25,7 @@ class MovieDetailViewModel @Inject constructor(
     init {
         val id = savedState.get<Long>("id")!!
         viewModelScope.launch {
-            moviesRepository.getMovieStream(id).collect {
+            getMovieStreamUseCase(id = id).collect {
                 _movie.emit(Movie.from(it))
             }
         }
@@ -32,7 +34,7 @@ class MovieDetailViewModel @Inject constructor(
     fun toggleFavorite() {
         viewModelScope.launch {
             movie.value?.let {
-                moviesRepository.setFavorite(id = it.id, !it.isFavorite)
+                setFavoriteMovieUseCase(id = it.id, !it.isFavorite)
             }
         }
     }

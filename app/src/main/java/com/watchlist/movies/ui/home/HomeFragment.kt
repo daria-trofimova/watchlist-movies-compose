@@ -2,6 +2,9 @@ package com.watchlist.movies.ui.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ProgressBar
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -28,11 +31,16 @@ class HomeFragment : Fragment(R.layout.fragment_home), OnItemClickListener<Movie
         val adapter = MovieAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        val progressBar = view.findViewById<ProgressBar>(R.id.progress_bar)
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.movies.collect {
-                    adapter.submitList(it)
+                viewModel.uiState.collect {
+                    adapter.submitList(it.movies)
+                    progressBar.isVisible = it.isLoading
+                    if (it.errorMessage != null) {
+                        showErrorMessage(it.errorMessage)
+                    }
                 }
             }
 
@@ -42,5 +50,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), OnItemClickListener<Movie
     override fun onItemClick(item: Movie) {
         val action = HomeFragmentDirections.actionHomeToMovieDetail(item.id)
         findNavController().navigate(action)
+    }
+
+    private fun showErrorMessage(text: String) {
+        Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
+        viewModel.markErrorMessageAsSeen()
     }
 }

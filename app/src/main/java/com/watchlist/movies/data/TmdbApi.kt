@@ -17,3 +17,5 @@ interface TmdbApi {
     @GET("account/${BuildConfig.TMDB_ACCOUNT_ID}/favorite/movies")
     suspend fun getFavoriteMovies(): Response<MoviesResponse>
 }
+
+const val MEDIA_TYPE_MOVIE = "movie"

@@ -1,5 +1,6 @@
-package com.watchlist.movies
+package com.watchlist.movies.di
 
+import com.watchlist.movies.BuildConfig
 import com.watchlist.movies.data.TmdbApi
 import dagger.Module
 import dagger.Provides
@@ -11,7 +12,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -42,5 +42,4 @@ object TmdbApiModule {
     }
 }
 
-// TODO: move to a better place
 private const val baseUrl = "https://api.themoviedb.org/3/"
