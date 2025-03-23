@@ -1,8 +1,8 @@
-package com.watchlist.movies.data
+package com.watchlist.tmdb_api.models
 
 import com.google.gson.annotations.SerializedName
 
-class MovieResponse(
+class Movie(
     @SerializedName("id") val id: Long,
     @SerializedName("title") val title: String,
     @SerializedName("overview") val overview: String,

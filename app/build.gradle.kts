@@ -19,9 +19,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField("String", "TMDB_API_KEY", "\"${System.getenv("tmdb.api.key")}\"")
-        buildConfigField("String", "TMDB_ACCOUNT_ID", "\"${System.getenv("tmdb.account.id")}\"")
     }
 
     buildTypes {
@@ -46,7 +43,7 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":tmdb_api"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -55,12 +52,8 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
-    implementation(libs.kotlinx.serialization.json)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.gson)
-    implementation(libs.okhttp.logging.interceptor)
     implementation(libs.dagger.hilt)
     ksp(libs.dagger.hilt.compiler)
     implementation(libs.coil)

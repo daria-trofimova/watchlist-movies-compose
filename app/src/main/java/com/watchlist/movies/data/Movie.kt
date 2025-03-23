@@ -14,7 +14,9 @@ data class Movie(
 ) {
 
     companion object {
-        fun from(movie: MovieResponse, isFavorite: Boolean): Movie =
+        fun from(
+            movie: com.watchlist.tmdb_api.models.Movie, isFavorite: Boolean,
+        ): Movie =
             Movie(
                 id = movie.id,
                 title = movie.title,

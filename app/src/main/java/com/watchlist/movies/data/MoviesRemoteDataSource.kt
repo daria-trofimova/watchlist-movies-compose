@@ -1,34 +1,40 @@
 package com.watchlist.movies.data
 
 import com.watchlist.movies.di.IoDispatcher
+import com.watchlist.tmdb_api.models.MediaType
+import com.watchlist.tmdb_api.models.Movie
+import com.watchlist.tmdb_api.models.SetFavoriteRequestBody
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MoviesRemoteDataSource @Inject constructor(
-    private val tmdbApi: TmdbApi,
+    private val tmdbApi: com.watchlist.tmdb_api.TmdbApi,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) {
 
-    suspend fun getMovies(): List<MovieResponse> =
+    suspend fun getMovies(): List<Movie> =
         withContext(dispatcher) {
             val response = tmdbApi.getPopularMovies()
             response.body()!!.results
         }
 
-    suspend fun getFavoriteMovies(): List<MovieResponse> =
+    suspend fun getFavoriteMovies(): List<Movie> =
         withContext(dispatcher) {
             val response = tmdbApi.getFavoriteMovies()
             response.body()!!.results
         }
 
-    suspend fun setFavorite(id: Long, isFavorite: Boolean) {
+    suspend fun setFavorite(
+        id: Long,
+        isFavorite: Boolean,
+    ) {
         withContext(dispatcher) {
             val body =
                 SetFavoriteRequestBody(
-                    mediaType = MEDIA_TYPE_MOVIE,
+                    mediaType = MediaType.MOVIE,
                     mediaId = id,
-                    isFavorite = isFavorite
+                    isFavorite = isFavorite,
                 )
             tmdbApi.setFavoriteMovie(body)
         }
