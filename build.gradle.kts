@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.dagger.hilt) apply false
     alias(libs.plugins.androidx.navigation.safe.args) apply false
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
+    alias(libs.plugins.android.library) apply false
 }
 
 val localProperties = java.util.Properties().apply {

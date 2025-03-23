@@ -44,6 +44,7 @@ android {
 
 dependencies {
     implementation(project(":tmdb_api"))
+    implementation(project(":database"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -52,8 +53,6 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
-    ksp(libs.room.compiler)
-    implementation(libs.room.ktx)
     implementation(libs.dagger.hilt)
     ksp(libs.dagger.hilt.compiler)
     implementation(libs.coil)

@@ -1,5 +1,7 @@
 package com.watchlist.movies.data
 
+import com.watchlist.database.Movie
+import com.watchlist.database.MoviesDao
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

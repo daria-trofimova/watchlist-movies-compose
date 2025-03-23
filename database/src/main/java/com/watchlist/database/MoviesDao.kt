@@ -1,4 +1,4 @@
-package com.watchlist.movies.data
+package com.watchlist.database
 
 import androidx.room.Dao
 import androidx.room.Insert

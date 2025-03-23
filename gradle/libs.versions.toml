@@ -54,3 +54,4 @@ devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 androidx-navigation-safe-args = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+android-library = { id = "com.android.library", version.ref = "agp" }
