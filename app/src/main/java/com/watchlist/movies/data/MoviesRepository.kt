@@ -1,5 +1,6 @@
 package com.watchlist.movies.data
 
+import com.watchlist.database.Movie
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -8,9 +9,9 @@ class MoviesRepository @Inject constructor(
     private val remoteDataSource: MoviesRemoteDataSource,
 ) {
 
-    val movies: Flow<List<com.watchlist.database.Movie>> = localDataSource.getMoviesStream()
+    val movies: Flow<List<Movie>> = localDataSource.getMoviesStream()
 
-    val favoriteMovies: Flow<List<com.watchlist.database.Movie>> =
+    val favoriteMovies: Flow<List<Movie>> =
         localDataSource.getFavoriteMoviesStream()
 
     suspend fun fetchMovies() {
@@ -25,7 +26,7 @@ class MoviesRepository @Inject constructor(
 
     fun getMovieStream(
         id: Long,
-    ): Flow<com.watchlist.database.Movie> = localDataSource.getMovieStream(id)
+    ): Flow<Movie> = localDataSource.getMovieStream(id)
 
     suspend fun setFavorite(
         id: Long,

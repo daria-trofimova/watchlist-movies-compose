@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.watchlist.movies.ui.home.HomeFragment"
+        android:name="com.watchlist.movies.ui.view.home.HomeFragment"
         android:label="Home">
         <action
             android:id="@+id/action_home_to_movie_detail"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/favorites"
-        android:name="com.watchlist.movies.ui.favorites.FavoritesFragment"
+        android:name="com.watchlist.movies.ui.view.favorites.FavoritesFragment"
         android:label="Favorites">
         <action
             android:id="@+id/action_favorites_to_movie_detail"
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/movie_detail"
-        android:name="com.watchlist.movies.ui.movie.detail.MovieDetailFragment"
+        android:name="com.watchlist.movies.ui.view.movie.detail.MovieDetailFragment"
         android:label="Movie Detail">
         <argument
             android:name="id"

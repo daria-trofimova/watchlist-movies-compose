@@ -1,4 +1,4 @@
-package com.watchlist.movies.ui.movie.detail
+package com.watchlist.movies.ui.view.movie.detail
 
 import android.os.Bundle
 import android.view.View
@@ -13,7 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.watchlist.movies.R
-import com.watchlist.movies.ui.loadPoster
+import com.watchlist.movies.ui.view.loadPoster
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

@@ -1,4 +1,4 @@
-package com.watchlist.movies.ui
+package com.watchlist.movies.ui.view
 
 import android.view.LayoutInflater
 import android.view.View

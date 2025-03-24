@@ -1,11 +1,11 @@
-package com.watchlist.movies.ui.movie.detail
+package com.watchlist.movies.ui.view.movie.detail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.watchlist.movies.domain.GetMovieStreamUseCase
 import com.watchlist.movies.domain.SetFavoriteMovieUseCase
-import com.watchlist.movies.ui.Movie
+import com.watchlist.movies.ui.view.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

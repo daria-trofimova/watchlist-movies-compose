@@ -37,6 +37,5 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     ksp(libs.room.compiler)
-    api(libs.room.ktx) // TODO: Refactor
-
+    implementation(libs.room.ktx)
 }

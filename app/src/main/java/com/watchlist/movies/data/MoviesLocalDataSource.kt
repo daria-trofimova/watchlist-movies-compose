@@ -1,32 +1,32 @@
 package com.watchlist.movies.data
 
 import com.watchlist.database.Movie
-import com.watchlist.database.MoviesDao
+import com.watchlist.database.MoviesDatabase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MoviesLocalDataSource @Inject constructor(
-    private val dao: MoviesDao,
+    private val database: MoviesDatabase,
 ) {
 
     suspend fun saveMovies(
         movies: List<Movie>,
     ) {
-        dao.insertAll(movies)
+        database.moviesDao().insertAll(movies)
     }
 
-    fun getMoviesStream(): Flow<List<Movie>> = dao.loadAll()
+    fun getMoviesStream(): Flow<List<Movie>> = database.moviesDao().loadAll()
 
-    fun getFavoriteMoviesStream(): Flow<List<Movie>> = dao.loadAllFavorite()
+    fun getFavoriteMoviesStream(): Flow<List<Movie>> = database.moviesDao().loadAllFavorite()
 
     fun getMovieStream(
         id: Long,
-    ): Flow<Movie> = dao.loadMovie(id)
+    ): Flow<Movie> = database.moviesDao().loadMovie(id)
 
     suspend fun setFavorite(
         id: Long,
         isFavorite: Boolean,
     ) {
-        dao.updateFavorite(id, isFavorite)
+        database.moviesDao().updateFavorite(id, isFavorite)
     }
 }
