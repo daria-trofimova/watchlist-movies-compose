@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.watchlist.movies.R
+import com.watchlist.movies.ui.Movie
 
 class MovieAdapter(private val clickListener: OnItemClickListener<Movie>) :
     ListAdapter<Movie, MovieAdapter.ViewHolder>(MovieDiffUtil()) {

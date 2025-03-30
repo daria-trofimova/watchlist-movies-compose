@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.watchlist.movies.R
-import com.watchlist.movies.ui.view.Movie
+import com.watchlist.movies.ui.Movie
 import com.watchlist.movies.ui.view.MovieAdapter
 import com.watchlist.movies.ui.view.OnItemClickListener
 import dagger.hilt.android.AndroidEntryPoint

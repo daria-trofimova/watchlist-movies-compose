@@ -1,4 +1,4 @@
-package com.watchlist.movies.ui.view
+package com.watchlist.movies.ui
 
 import java.util.Locale
 
