@@ -1,21 +1,20 @@
 package com.watchlist.movies.ui
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -31,23 +30,16 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.watchlist.movies.R
 
 @Composable
-internal fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
-    Scaffold(
-        topBar = {
-            MoviesAppBar(
-                canNavigateBack = false,
-                navigateUp = { /* TODO: implement back navigation */ }
-            )
-        }
-    ) { padding ->
-        val modifier = Modifier.padding(padding)
-        val state by viewModel.state.collectAsState()
-        when (val currentState = state) {
-            is State.Initial -> MoviesEmpty(modifier)
-            is State.Loading -> MoviesLoading(modifier)
-            is State.Error -> MoviesError(modifier)
-            is State.Success -> Movies(currentState.movies, modifier)
-        }
+internal fun HomeScreen(
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = viewModel(),
+) {
+    val state by viewModel.state.collectAsState()
+    when (val currentState = state) {
+        is State.Initial -> MoviesEmpty(modifier)
+        is State.Loading -> MoviesLoading(modifier)
+        is State.Error -> MoviesError(modifier)
+        is State.Success -> Movies(currentState.movies, modifier)
     }
 }
 
@@ -63,11 +55,7 @@ internal fun MoviesEmpty(modifier: Modifier = Modifier) {
 @Preview
 internal fun MoviesLoading(modifier: Modifier = Modifier) {
     Box(contentAlignment = Alignment.Center, modifier = modifier.fillMaxSize()) {
-        CircularProgressIndicator(
-            modifier = Modifier.width(24.dp),
-            color = MaterialTheme.colorScheme.secondary,
-            trackColor = MaterialTheme.colorScheme.surfaceVariant,
-        )
+        CircularProgressIndicator()
     }
 }
 
@@ -97,13 +85,20 @@ internal fun Movies(
 
 @Composable
 internal fun Movie(movie: Movie, modifier: Modifier = Modifier) {
-    Column(
+    Surface(
+        shadowElevation = 8.dp,
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.background,
         modifier = modifier
-            .background(MaterialTheme.colorScheme.background)
-            .border(1.dp, MaterialTheme.colorScheme.secondary)
-            .padding(4.dp)
+            .height(170.dp),
+    ) { }
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(4.dp)
     ) {
-        MoviePoster(movie.posterLink)
+        MoviePoster(movie.posterLink, modifier = Modifier
+            .fillMaxWidth()
+            .height(100.dp))
         Text(text = movie.title)
         Spacer(modifier = Modifier.size(8.dp))
         Text(text = movie.ratingFormatted)

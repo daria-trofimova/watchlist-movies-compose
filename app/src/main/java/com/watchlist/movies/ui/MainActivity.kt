@@ -3,13 +3,15 @@ package com.watchlist.movies.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.watchlist.movies.R
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.watchlist.movies.ui.navigation.Screen
 import com.watchlist.movies.ui.theme.MoviesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,36 +19,35 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        //enableEdgeToEdge()
-//        setupViews()
         setContent {
             MoviesAppTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    HomeScreen()
+                val navController = rememberNavController()
+                Scaffold(
+                    topBar = {
+                        MoviesTopAppBar(
+                            canNavigateBack = navController.previousBackStackEntry != null,
+                            navigateUp = { navController.navigateUp() }
+                        )
+                    },
+                    bottomBar = { MoviesNavigationBar(navController = navController) }
+                ) { padding ->
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.Home.route,
+                        modifier = Modifier.padding(padding),
+                    ) {
+                        composable(route = Screen.Home.route) {
+                            val viewModel = hiltViewModel<HomeViewModel>()
+                            HomeScreen(viewModel = viewModel)
+                        }
+                        composable(route = Screen.Favorites.route) {
+                            FavoritesScreen()
+                        }
+                    }
                 }
             }
         }
-    }
-
-    private fun setupViews() {
-        setContentView(R.layout.activity_main)
-        setupNavigation()
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-    }
-
-    private fun setupNavigation() {
-//        val navHostFragment =
-//            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-//        val navController = navHostFragment.navController
-//        findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
-//            .setupWithNavController(navController)
     }
 }

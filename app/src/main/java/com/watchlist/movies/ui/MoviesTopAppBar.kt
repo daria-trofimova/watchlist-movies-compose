@@ -16,7 +16,7 @@ import com.watchlist.movies.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MoviesAppBar(
+internal fun MoviesTopAppBar(
     canNavigateBack: Boolean,
     navigateUp: () -> Unit,
     modifier: Modifier = Modifier

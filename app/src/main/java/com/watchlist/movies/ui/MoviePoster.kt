@@ -2,6 +2,7 @@ package com.watchlist.movies.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
@@ -13,11 +14,12 @@ import coil3.compose.LocalAsyncImagePreviewHandler
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-internal fun MoviePoster(posterLink: String) {
+internal fun MoviePoster(posterLink: String, modifier: Modifier = Modifier) {
     CompositionLocalProvider(LocalAsyncImagePreviewHandler provides previewHandler) {
         AsyncImage(
             model = imagesBaseUrl + posterLink,
             contentDescription = null,
+            modifier = modifier,
         )
     }
 }
