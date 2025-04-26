@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.watchlist.movies.domain.FetchMoviesUseCase
 import com.watchlist.movies.domain.GetMoviesStreamUseCase
-import com.watchlist.movies.ui.Movie
+import com.watchlist.movies.ui.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

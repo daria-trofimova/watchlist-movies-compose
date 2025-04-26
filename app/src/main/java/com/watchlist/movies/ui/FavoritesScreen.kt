@@ -1,5 +1,6 @@
 package com.watchlist.movies.ui
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,5 +11,7 @@ import com.watchlist.movies.R
 @Composable
 @Preview
 internal fun FavoritesScreen(modifier: Modifier = Modifier) {
-    Text(text = stringResource(id = R.string.favorites))
+    Column {
+        Text(text = stringResource(id = R.string.favorites))
+    }
 }

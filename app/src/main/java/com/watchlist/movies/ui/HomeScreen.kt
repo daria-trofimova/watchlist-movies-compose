@@ -1,5 +1,6 @@
 package com.watchlist.movies.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -23,11 +24,13 @@ import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.watchlist.movies.R
+import com.watchlist.movies.ui.model.Movie
 
 @Composable
 internal fun HomeScreen(
@@ -73,6 +76,8 @@ internal fun Movies(
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 100.dp),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier,
     ) {
         items(movies) { movie ->
@@ -87,21 +92,26 @@ internal fun Movies(
 internal fun Movie(movie: Movie, modifier: Modifier = Modifier) {
     Surface(
         shadowElevation = 8.dp,
-        shape = MaterialTheme.shapes.medium,
         color = MaterialTheme.colorScheme.background,
         modifier = modifier
-            .height(170.dp),
+            .fillMaxWidth()
+            .height(180.dp),
     ) { }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(4.dp)
+        modifier = Modifier.fillMaxSize()
     ) {
         MoviePoster(movie.posterLink, modifier = Modifier
             .fillMaxWidth()
             .height(100.dp))
-        Text(text = movie.title)
-        Spacer(modifier = Modifier.size(8.dp))
-        Text(text = movie.ratingFormatted)
+        Text(
+            text = movie.title,
+            maxLines = 2,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(4.dp)
+        )
+        Spacer(modifier = Modifier.size(4.dp))
+        Text(text = movie.ratingFormatted, modifier = Modifier.padding(4.dp))
     }
 }
 
