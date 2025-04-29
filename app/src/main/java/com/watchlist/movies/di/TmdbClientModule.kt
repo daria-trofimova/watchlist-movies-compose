@@ -1,5 +1,6 @@
 package com.watchlist.movies.di
 
+import com.watchlist.movies.BuildConfig
 import com.watchlist.tmdb.TmdbClient
 import dagger.Module
 import dagger.Provides
@@ -15,7 +16,5 @@ object TmdbClientModule {
     @Provides
     @Singleton
     fun provideTmdbClient(@IoDispatcher dispatcher: CoroutineDispatcher): TmdbClient =
-        TmdbClient(baseUrl = baseUrl, dispatcher = dispatcher)
+        TmdbClient(baseUrl = BuildConfig.TMDB_BASE_URL, dispatcher = dispatcher)
 }
-
-private const val baseUrl = "https://api.themoviedb.org/3/"
