@@ -1,4 +1,4 @@
-package com.watchlist.tmdb_api.model
+package com.watchlist.tmdb.model
 
 import com.google.gson.annotations.SerializedName
 

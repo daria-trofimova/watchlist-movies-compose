@@ -1,6 +1,6 @@
-package com.watchlist.tmdb_api
+package com.watchlist.tmdb
 
-import com.watchlist.tmdb_api.model.Movie
+import com.watchlist.tmdb.model.Movie
 import kotlinx.coroutines.CoroutineDispatcher
 
 interface TmdbClient {

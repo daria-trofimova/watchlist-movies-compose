@@ -2,7 +2,7 @@ package com.watchlist.data
 
 import com.watchlist.data.model.Movie
 import com.watchlist.database.MoviesDatabase
-import com.watchlist.tmdb_api.TmdbClient
+import com.watchlist.tmdb.TmdbClient
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

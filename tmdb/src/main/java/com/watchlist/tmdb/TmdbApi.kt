@@ -1,9 +1,9 @@
-package com.watchlist.tmdb_api
+package com.watchlist.tmdb
 
 import TMDB_ACCOUNT_ID
 import TMDB_API_KEY
-import com.watchlist.tmdb_api.model.Movies
-import com.watchlist.tmdb_api.model.SetFavoriteRequestBody
+import com.watchlist.tmdb.model.Movies
+import com.watchlist.tmdb.model.SetFavoriteRequestBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor

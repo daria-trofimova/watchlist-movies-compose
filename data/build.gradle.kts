@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":tmdb_api"))
+    implementation(project(":tmdb"))
     implementation(project(":database"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.kotlinx.coroutines.core)

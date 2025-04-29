@@ -21,6 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Movies"
 include(":app")
-include(":tmdb_api")
+include(":tmdb")
 include(":database")
 include(":data")

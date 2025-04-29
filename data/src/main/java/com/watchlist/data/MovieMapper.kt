@@ -2,7 +2,7 @@ package com.watchlist.data
 
 import com.watchlist.database.Movie
 
-internal fun com.watchlist.tmdb_api.model.Movie.toDatabaseModel(isFavorite: Boolean = false): Movie =
+internal fun com.watchlist.tmdb.model.Movie.toDatabaseModel(isFavorite: Boolean = false): Movie =
     Movie(
         id = id,
         title = title,

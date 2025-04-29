@@ -1,6 +1,6 @@
 package com.watchlist.movies.di
 
-import com.watchlist.tmdb_api.TmdbClient
+import com.watchlist.tmdb.TmdbClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

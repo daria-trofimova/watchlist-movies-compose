@@ -1,8 +1,8 @@
-package com.watchlist.tmdb_api
+package com.watchlist.tmdb
 
-import com.watchlist.tmdb_api.model.MediaType
-import com.watchlist.tmdb_api.model.Movie
-import com.watchlist.tmdb_api.model.SetFavoriteRequestBody
+import com.watchlist.tmdb.model.MediaType
+import com.watchlist.tmdb.model.Movie
+import com.watchlist.tmdb.model.SetFavoriteRequestBody
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
