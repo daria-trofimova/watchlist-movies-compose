@@ -38,9 +38,10 @@ tasks.named("compileKotlin") {
 }
 
 dependencies {
-    api(libs.retrofit) // TODO: refactor
+    implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.annotation)
+    implementation(libs.kotlinx.coroutines.core)
 }

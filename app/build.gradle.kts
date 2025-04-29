@@ -47,6 +47,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":data"))
     implementation(project(":tmdb_api"))
     implementation(project(":database"))
     implementation(libs.androidx.core.ktx)

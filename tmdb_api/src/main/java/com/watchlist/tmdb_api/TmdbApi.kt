@@ -2,8 +2,8 @@ package com.watchlist.tmdb_api
 
 import TMDB_ACCOUNT_ID
 import TMDB_API_KEY
-import com.watchlist.tmdb_api.models.Movies
-import com.watchlist.tmdb_api.models.SetFavoriteRequestBody
+import com.watchlist.tmdb_api.model.Movies
+import com.watchlist.tmdb_api.model.SetFavoriteRequestBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,7 +17,7 @@ import retrofit2.http.POST
 /**
  * [Api documentation](https://developer.themoviedb.org/reference/intro/getting-started)
  * */
-interface TmdbApi {
+internal interface TmdbApi {
 
     /**
      * [Route details](https://developer.themoviedb.org/reference/movie-popular-list)
@@ -40,7 +40,7 @@ interface TmdbApi {
     suspend fun getFavoriteMovies(): Response<Movies>
 }
 
-fun TmdbApi(
+internal fun TmdbApi(
     baseUrl: String,
 ): TmdbApi {
     val loggingInterceptor = HttpLoggingInterceptor()
@@ -54,7 +54,7 @@ fun TmdbApi(
                 .build()
             chain.proceed(request)
         }
-        .addInterceptor(loggingInterceptor)
+        .addInterceptor(loggingInterceptor) // TODO: disable for release build
         .build()
     return Retrofit.Builder()
         .baseUrl(baseUrl)

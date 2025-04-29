@@ -1,8 +1,8 @@
-package com.watchlist.tmdb_api.models
+package com.watchlist.tmdb_api.model
 
 import com.google.gson.annotations.SerializedName
 
-class SetFavoriteRequestBody(
+internal class SetFavoriteRequestBody(
     @SerializedName("media_type") val mediaType: MediaType,
     @SerializedName("media_id") val mediaId: Long,
     @SerializedName("favorite") val isFavorite: Boolean,

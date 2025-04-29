@@ -1,6 +1,6 @@
 package com.watchlist.movies.domain
 
-import com.watchlist.movies.data.MoviesRepository
+import com.watchlist.data.MoviesRepository
 import javax.inject.Inject
 
 class SetFavoriteMovieUseCase @Inject constructor(

@@ -1,6 +1,7 @@
 package com.watchlist.movies.domain
 
-import com.watchlist.movies.data.MoviesRepository
+import com.watchlist.data.MoviesRepository
+import com.watchlist.data.model.Movie
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -10,5 +11,5 @@ class GetMovieStreamUseCase @Inject constructor(
 
     operator fun invoke(
         id: Long,
-    ): Flow<com.watchlist.database.Movie> = moviesRepository.getMovieStream(id)
+    ): Flow<Movie> = moviesRepository.getMovieStream(id)
 }

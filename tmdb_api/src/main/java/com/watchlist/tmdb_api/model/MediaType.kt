@@ -1,8 +1,8 @@
-package com.watchlist.tmdb_api.models
+package com.watchlist.tmdb_api.model
 
 import com.google.gson.annotations.SerializedName
 
-enum class MediaType {
+internal enum class MediaType {
     @SerializedName("movie")
     MOVIE,
 }

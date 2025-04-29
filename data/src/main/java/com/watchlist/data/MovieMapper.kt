@@ -1,8 +1,8 @@
-package com.watchlist.movies.data
+package com.watchlist.data
 
 import com.watchlist.database.Movie
 
-fun com.watchlist.tmdb_api.models.Movie.toLocalModel(isFavorite: Boolean): Movie =
+internal fun com.watchlist.tmdb_api.model.Movie.toDatabaseModel(isFavorite: Boolean = false): Movie =
     Movie(
         id = id,
         title = title,
