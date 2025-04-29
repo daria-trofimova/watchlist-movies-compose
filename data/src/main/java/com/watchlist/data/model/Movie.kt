@@ -6,7 +6,6 @@ data class Movie(
     val overview: String,
     val rating: Float,
     val posterLink: String,
-    var isFavorite: Boolean,
 ) {
     companion object {
         fun from(movie: com.watchlist.database.Movie): Movie = Movie(
@@ -15,7 +14,6 @@ data class Movie(
             overview = movie.overview,
             rating = movie.rating,
             posterLink = movie.posterLink,
-            isFavorite = movie.isFavorite
         )
     }
 }

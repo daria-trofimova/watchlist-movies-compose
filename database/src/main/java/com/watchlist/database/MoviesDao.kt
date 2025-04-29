@@ -14,17 +14,8 @@ interface MoviesDao {
         movies: List<Movie>,
     )
 
-    @Query("UPDATE movie SET isFavorite=:isFavorite WHERE id = :id")
-    suspend fun updateFavorite(
-        id: Long,
-        isFavorite: Boolean,
-    )
-
     @Query("SELECT * FROM movie")
     fun loadAll(): Flow<List<Movie>>
-
-    @Query("SELECT * FROM movie WHERE isFavorite = 1")
-    fun loadAllFavorite(): Flow<List<Movie>>
 
     @Query("SELECT * FROM movie WHERE id = :id")
     fun loadMovie(

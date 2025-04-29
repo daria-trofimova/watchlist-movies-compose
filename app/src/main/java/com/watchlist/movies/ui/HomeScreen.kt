@@ -1,5 +1,6 @@
 package com.watchlist.movies.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,6 +24,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,7 +43,7 @@ internal fun HomeScreen(
     when (val currentState = state) {
         is State.Initial -> MoviesEmpty(modifier)
         is State.Loading -> MoviesLoading(modifier)
-        is State.Error -> MoviesError(modifier)
+        is State.Error -> MoviesError(currentState.error, modifier)
         is State.Success -> Movies(currentState.movies, modifier)
     }
 }
@@ -63,8 +65,10 @@ internal fun MoviesLoading(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun MoviesError(modifier: Modifier = Modifier) {
-    TODO()
+internal fun MoviesError(error: Throwable, modifier: Modifier = Modifier) {
+    val text = error.localizedMessage
+    val toast = Toast.makeText(LocalContext.current, text, Toast.LENGTH_SHORT)
+    toast.show()
 }
 
 @Preview
@@ -125,7 +129,6 @@ internal fun MoviePreview() {
             overview = "",
             rating = 1.0f,
             posterLink = "",
-            isFavorite = false
         )
     )
 }

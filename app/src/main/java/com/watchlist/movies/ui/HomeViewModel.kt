@@ -2,8 +2,8 @@ package com.watchlist.movies.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.watchlist.movies.domain.FetchMoviesUseCase
-import com.watchlist.movies.domain.GetMoviesStreamUseCase
+import com.watchlist.data.Result
+import com.watchlist.movies.domain.GetMoviesUseCase
 import com.watchlist.movies.ui.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,8 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class HomeViewModel @Inject constructor(
-    private val getMoviesStreamUseCase: GetMoviesStreamUseCase,
-    private val fetchMoviesUseCase: FetchMoviesUseCase,
+    private val getMoviesUseCase: GetMoviesUseCase,
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<State> = MutableStateFlow(State.Initial())
@@ -22,11 +21,8 @@ internal class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            fetchMoviesUseCase()
-        }
-        viewModelScope.launch {
-            getMoviesStreamUseCase().collect {
-                _state.emit(State.Success((it.map { Movie.from(it) })))
+            getMoviesUseCase().collect { result ->
+                _state.emit(State.from(result))
             }
         }
     }
@@ -35,6 +31,17 @@ internal class HomeViewModel @Inject constructor(
 internal sealed class State {
     data class Initial(val movies: List<Movie> = emptyList()) : State()
     data class Loading(val movies: List<Movie> = emptyList()) : State()
-    class Error(val movies: List<Movie> = emptyList()) : State()
+    class Error(val error: Throwable, val movies: List<Movie> = emptyList()) : State()
     class Success(val movies: List<Movie>) : State()
+
+    companion object {
+        fun from(result: Result<List<com.watchlist.data.model.Movie>>): State = when (result) {
+            is Result.InProgress -> Loading(result.data?.map { Movie.from(it) } ?: emptyList())
+            is Result.Error -> Error(
+                error = result.error ?: Error("Unknown error"),
+                result.data?.map { Movie.from(it) } ?: emptyList())
+
+            is Result.Success -> Success(result.data.map { Movie.from(it) })
+        }
+    }
 }

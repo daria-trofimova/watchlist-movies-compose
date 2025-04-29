@@ -1,8 +1,6 @@
 package com.watchlist.tmdb
 
-import com.watchlist.tmdb.model.MediaType
 import com.watchlist.tmdb.model.Movie
-import com.watchlist.tmdb.model.SetFavoriteRequestBody
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -19,43 +17,6 @@ internal class TmdbClientImpl(
                     Result.success(response.body()!!.results)
                 } else {
                     Result.failure(Exception("Error getting popular movies: ${response.code()}"))
-                }
-            } catch (e: Exception) {
-                Result.failure(e)
-            }
-        }
-
-    override suspend fun getFavoriteMovies(): Result<List<Movie>> =
-        withContext(dispatcher) {
-            try {
-                val response = tmdbApi.getFavoriteMovies()
-                if (response.isSuccessful) {
-                    Result.success(response.body()!!.results)
-                } else {
-                    Result.failure(Exception("Error getting favorite movies: ${response.code()}"))
-                }
-            } catch (e: Exception) {
-                Result.failure(e)
-            }
-        }
-
-    override suspend fun setFavorite(
-        id: Long,
-        isFavorite: Boolean,
-    ): Result<Unit> =
-        withContext(dispatcher) {
-            try {
-                val body =
-                    SetFavoriteRequestBody(
-                        mediaType = MediaType.MOVIE,
-                        mediaId = id,
-                        isFavorite = isFavorite,
-                    )
-                val response = tmdbApi.setFavoriteMovie(body)
-                if (response.isSuccessful) {
-                    Result.success(Unit)
-                } else {
-                    Result.failure(Exception("Error getting favorite movies: ${response.code()}"))
                 }
             } catch (e: Exception) {
                 Result.failure(e)

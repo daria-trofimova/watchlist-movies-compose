@@ -8,7 +8,6 @@ data class Movie(
     val overview: String,
     val rating: Float,
     val posterLink: String,
-    val isFavorite: Boolean,
 ) {
 
     val ratingFormatted: String get() = String.format(Locale.US, "%.2f", rating)
@@ -21,7 +20,6 @@ data class Movie(
                 overview = movie.overview,
                 rating = movie.rating,
                 posterLink = movie.posterLink,
-                isFavorite = movie.isFavorite,
             )
     }
 }

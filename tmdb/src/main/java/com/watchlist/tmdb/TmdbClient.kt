@@ -6,10 +6,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 interface TmdbClient {
 
     suspend fun getMovies(): Result<List<Movie>>
-
-    suspend fun getFavoriteMovies(): Result<List<Movie>>
-
-    suspend fun setFavorite(id: Long, isFavorite: Boolean): Result<Unit>
 }
 
 fun TmdbClient(

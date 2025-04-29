@@ -10,5 +10,4 @@ data class Movie(
     val overview: String,
     val rating: Float,
     val posterLink: String,
-    var isFavorite: Boolean,
 )

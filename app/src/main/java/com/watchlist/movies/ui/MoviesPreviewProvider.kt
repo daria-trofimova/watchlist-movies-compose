@@ -12,7 +12,6 @@ internal class MoviesPreviewProvider : PreviewParameterProvider<List<Movie>> {
                 overview = "",
                 rating = 1.0f,
                 posterLink = "",
-                isFavorite = false
             ),
             Movie(
                 id = 101,
@@ -20,7 +19,6 @@ internal class MoviesPreviewProvider : PreviewParameterProvider<List<Movie>> {
                 overview = "",
                 rating = 1.0f,
                 posterLink = "",
-                isFavorite = false
             ),
             Movie(
                 id = 102,
@@ -28,7 +26,6 @@ internal class MoviesPreviewProvider : PreviewParameterProvider<List<Movie>> {
                 overview = "",
                 rating = 1.0f,
                 posterLink = "",
-                isFavorite = false
             ),
             Movie(
                 id = 103,
@@ -36,7 +33,6 @@ internal class MoviesPreviewProvider : PreviewParameterProvider<List<Movie>> {
                 overview = "",
                 rating = 1.0f,
                 posterLink = "",
-                isFavorite = false
             )
         )
     )
