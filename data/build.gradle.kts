@@ -35,6 +35,9 @@ android {
 dependencies {
     implementation(project(":tmdb"))
     implementation(project(":database"))
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.espresso.core)
     implementation(libs.androidx.core.ktx)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.jakarta.inject)
