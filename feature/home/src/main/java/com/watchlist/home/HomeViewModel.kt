@@ -1,10 +1,9 @@
-package com.watchlist.movies.ui
+package com.watchlist.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.watchlist.data.Result
-import com.watchlist.movies.domain.GetMoviesUseCase
-import com.watchlist.movies.ui.model.Movie
+import com.watchlist.home.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-internal class HomeViewModel @Inject constructor(
+class HomeViewModel @Inject constructor(
     private val getMoviesUseCase: GetMoviesUseCase,
 ) : ViewModel() {
 
@@ -28,7 +27,7 @@ internal class HomeViewModel @Inject constructor(
     }
 }
 
-internal sealed class State {
+sealed class State {
     data class Initial(val movies: List<Movie> = emptyList()) : State()
     data class Loading(val movies: List<Movie> = emptyList()) : State()
     class Error(val error: Throwable, val movies: List<Movie> = emptyList()) : State()

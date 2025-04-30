@@ -26,9 +26,8 @@ class MoviesRepository @Inject constructor(
                     moviesDatabase.moviesDao().insertAll(movies)
                     emit(Result.Success(movies.map { Movie.from(it) }))
                 }
-
                 result.isFailure -> {
-                    emit(Result.Error(data = cachedMovies, error = result.exceptionOrNull()))
+                    emit(Result.Error(error = result.exceptionOrNull(), data = cachedMovies))
                 }
             }
         }

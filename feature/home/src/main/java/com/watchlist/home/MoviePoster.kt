@@ -1,4 +1,4 @@
-package com.watchlist.movies.ui
+package com.watchlist.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -17,7 +17,7 @@ import coil3.compose.LocalAsyncImagePreviewHandler
 internal fun MoviePoster(posterLink: String, modifier: Modifier = Modifier) {
     CompositionLocalProvider(LocalAsyncImagePreviewHandler provides previewHandler) {
         AsyncImage(
-            model = imagesBaseUrl + posterLink,
+            model = BuildConfig.TMDB_IMAGES_BASE_URL + posterLink,
             contentDescription = null,
             modifier = modifier,
         )
@@ -35,5 +35,3 @@ internal fun MoviePosterPreview() {
 internal val previewHandler = AsyncImagePreviewHandler {
     ColorImage(Color.Gray.toArgb())
 }
-
-const val imagesBaseUrl = "http://image.tmdb.org/t/p/w500"

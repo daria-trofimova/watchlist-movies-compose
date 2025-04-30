@@ -1,4 +1,4 @@
-package com.watchlist.movies.ui.model
+package com.watchlist.home.model
 
 import java.util.Locale
 

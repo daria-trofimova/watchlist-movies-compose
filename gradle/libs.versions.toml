@@ -8,13 +8,10 @@ coreKtx = "1.16.0"
 junit = "4.13.2"
 androidxJunit = "1.2.1"
 espressoCore = "3.6.1"
-appcompat = "1.7.0"
 kotlinxCoroutinesCore = "1.10.2"
 lifecycleViewmodelCompose = "2.8.7"
 material = "1.12.0"
 activity = "1.10.1"
-fragment = "1.8.6"
-navigation = "2.8.9"
 navigationCompose = "2.8.9"
 serializationPlugin = "2.0.21"
 serializationJson = "1.7.3"
@@ -41,14 +38,10 @@ androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
-androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigation" }
-navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigation" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serializationJson" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
@@ -69,7 +62,6 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serializationPlugin" }
 devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-androidx-navigation-safe-args = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

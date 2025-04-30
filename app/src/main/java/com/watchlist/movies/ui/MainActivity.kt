@@ -39,8 +39,8 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(padding),
                     ) {
                         composable(route = Screen.Home.route) {
-                            val viewModel = hiltViewModel<HomeViewModel>()
-                            HomeScreen(viewModel = viewModel)
+                            val viewModel = hiltViewModel<com.watchlist.home.HomeViewModel>()
+                            com.watchlist.home.HomeScreen(viewModel = viewModel)
                         }
                         composable(route = Screen.Favorites.route) {
                             FavoritesScreen()

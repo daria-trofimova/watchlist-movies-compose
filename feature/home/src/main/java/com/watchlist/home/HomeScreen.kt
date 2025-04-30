@@ -1,4 +1,4 @@
-package com.watchlist.movies.ui
+package com.watchlist.home
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -31,11 +31,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.watchlist.movies.R
-import com.watchlist.movies.ui.model.Movie
+import com.watchlist.home.model.Movie
 
 @Composable
-internal fun HomeScreen(
+fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(),
 ) {
