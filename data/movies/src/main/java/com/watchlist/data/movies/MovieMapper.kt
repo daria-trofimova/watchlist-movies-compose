@@ -1,4 +1,4 @@
-package com.watchlist.data
+package com.watchlist.data.movies
 
 import com.watchlist.database.Movie
 

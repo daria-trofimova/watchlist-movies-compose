@@ -1,6 +1,6 @@
-package com.watchlist.data
+package com.watchlist.data.movies
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 /**

@@ -23,5 +23,5 @@ rootProject.name = "Movies"
 include(":app")
 include(":tmdb")
 include(":database")
-include(":data")
+include(":data:movies")
 include(":feature:home")

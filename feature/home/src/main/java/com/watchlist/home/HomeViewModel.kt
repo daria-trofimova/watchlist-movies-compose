@@ -2,7 +2,7 @@ package com.watchlist.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.watchlist.data.Result
+import com.watchlist.data.movies.Result
 import com.watchlist.home.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -34,7 +34,8 @@ sealed class State {
     class Success(val movies: List<Movie>) : State()
 
     companion object {
-        fun from(result: Result<List<com.watchlist.data.model.Movie>>): State = when (result) {
+        fun from(result: Result<List<com.watchlist.data.movies.model.Movie>>): State =
+            when (result) {
             is Result.InProgress -> Loading(result.data?.map { Movie.from(it) } ?: emptyList())
             is Result.Error -> Error(
                 error = result.error ?: Error("Unknown error"),

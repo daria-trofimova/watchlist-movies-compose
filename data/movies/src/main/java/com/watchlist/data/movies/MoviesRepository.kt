@@ -1,6 +1,6 @@
-package com.watchlist.data
+package com.watchlist.data.movies
 
-import com.watchlist.data.model.Movie
+import com.watchlist.data.movies.model.Movie
 import com.watchlist.database.MoviesDatabase
 import com.watchlist.tmdb.TmdbClient
 import jakarta.inject.Inject
@@ -26,6 +26,7 @@ class MoviesRepository @Inject constructor(
                     moviesDatabase.moviesDao().insertAll(movies)
                     emit(Result.Success(movies.map { Movie.from(it) }))
                 }
+
                 result.isFailure -> {
                     emit(Result.Error(error = result.exceptionOrNull(), data = cachedMovies))
                 }

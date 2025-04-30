@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":data"))
+    implementation(project(":data:movies"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
     testImplementation(libs.junit)

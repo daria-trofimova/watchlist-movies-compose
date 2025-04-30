@@ -1,4 +1,4 @@
-package com.watchlist.data.model
+package com.watchlist.data.movies.model
 
 data class Movie(
     val id: Long,

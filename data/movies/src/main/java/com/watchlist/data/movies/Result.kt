@@ -1,4 +1,4 @@
-package com.watchlist.data
+package com.watchlist.data.movies
 
 sealed class Result<out T> {
     data class InProgress<out T>(val data: T? = null) : Result<T>()

@@ -46,7 +46,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":data"))
+    implementation(project(":data:movies"))
     implementation(project(":tmdb"))
     implementation(project(":database"))
     implementation(project(":feature:home"))

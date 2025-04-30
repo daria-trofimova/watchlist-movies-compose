@@ -1,8 +1,8 @@
 package com.watchlist.home
 
-import com.watchlist.data.MoviesRepository
-import com.watchlist.data.Result
-import com.watchlist.data.model.Movie
+import com.watchlist.data.movies.MoviesRepository
+import com.watchlist.data.movies.Result
+import com.watchlist.data.movies.model.Movie
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

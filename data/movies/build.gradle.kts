@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.watchlist.data"
+    namespace = "com.watchlist.data.movies"
     compileSdk = 35
 
     defaultConfig {
