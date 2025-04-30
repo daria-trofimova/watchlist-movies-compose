@@ -1,4 +1,4 @@
-package com.watchlist.home.model
+package com.watchlist.feature.home.model
 
 import java.util.Locale
 

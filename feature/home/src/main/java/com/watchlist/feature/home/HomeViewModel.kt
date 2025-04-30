@@ -1,9 +1,9 @@
-package com.watchlist.home
+package com.watchlist.feature.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.watchlist.data.movies.Result
-import com.watchlist.home.model.Movie
+import com.watchlist.feature.home.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -1,4 +1,4 @@
-package com.watchlist.home
+package com.watchlist.feature.home
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

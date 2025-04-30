@@ -1,7 +1,7 @@
-package com.watchlist.home
+package com.watchlist.feature.home
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.watchlist.home.model.Movie
+import com.watchlist.feature.home.model.Movie
 
 internal class MoviesPreviewProvider : PreviewParameterProvider<List<Movie>> {
     override val values: Sequence<List<Movie>> = sequenceOf(

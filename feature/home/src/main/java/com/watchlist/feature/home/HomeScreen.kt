@@ -1,4 +1,4 @@
-package com.watchlist.home
+package com.watchlist.feature.home
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -31,7 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.watchlist.home.model.Movie
+import com.watchlist.feature.home.model.Movie
 
 @Composable
 fun HomeScreen(

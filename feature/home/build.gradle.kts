@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.watchlist.home"
+    namespace = "com.watchlist.feature.home"
     compileSdk = 35
 
     defaultConfig {

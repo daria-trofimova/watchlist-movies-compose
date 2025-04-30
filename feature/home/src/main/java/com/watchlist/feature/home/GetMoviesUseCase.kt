@@ -1,4 +1,4 @@
-package com.watchlist.home
+package com.watchlist.feature.home
 
 import com.watchlist.data.movies.MoviesRepository
 import com.watchlist.data.movies.Result

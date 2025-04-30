@@ -1,4 +1,4 @@
-package com.watchlist.home
+package com.watchlist.feature.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider

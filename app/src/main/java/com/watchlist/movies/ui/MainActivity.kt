@@ -11,6 +11,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.watchlist.feature.home.HomeScreen
+import com.watchlist.feature.home.HomeViewModel
 import com.watchlist.movies.ui.navigation.Screen
 import com.watchlist.movies.ui.theme.MoviesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,8 +41,8 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(padding),
                     ) {
                         composable(route = Screen.Home.route) {
-                            val viewModel = hiltViewModel<com.watchlist.home.HomeViewModel>()
-                            com.watchlist.home.HomeScreen(viewModel = viewModel)
+                            val viewModel = hiltViewModel<HomeViewModel>()
+                            HomeScreen(viewModel = viewModel)
                         }
                         composable(route = Screen.Favorites.route) {
                             FavoritesScreen()

@@ -1,4 +1,4 @@
-package com.watchlist.home
+package com.watchlist.feature.home
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
