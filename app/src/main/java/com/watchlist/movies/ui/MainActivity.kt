@@ -7,12 +7,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.watchlist.feature.home.HomeScreen
-import com.watchlist.feature.home.HomeViewModel
+import com.watchlist.feature.moviedetails.MovieDetailsScreen
 import com.watchlist.movies.ui.navigation.Screen
 import com.watchlist.movies.ui.theme.MoviesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,8 +42,19 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(padding),
                     ) {
                         composable(route = Screen.Home.route) {
-                            val viewModel = hiltViewModel<HomeViewModel>()
-                            HomeScreen(viewModel = viewModel)
+                            HomeScreen(onMovieClick = { movie ->
+                                navController.navigate("movie_details/${movie.id}")
+                            })
+                        }
+                        composable(
+                            route = Screen.MovieDetails.route,
+                            arguments = listOf(navArgument("MOVIE_ID") {
+                                type =
+                                    NavType.LongType
+                            })
+                        ) { backStackEntry ->
+                            val movieId = backStackEntry.arguments?.getLong("MOVIE_ID") ?: 0
+                            MovieDetailsScreen(movieId = movieId)
                         }
                         composable(route = Screen.Favorites.route) {
                             FavoritesScreen()

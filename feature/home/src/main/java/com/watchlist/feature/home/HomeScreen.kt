@@ -1,6 +1,7 @@
 package com.watchlist.feature.home
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,20 +31,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.watchlist.feature.home.model.Movie
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = viewModel(),
+    onMovieClick: (Movie) -> Unit,
+    viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
     when (val currentState = state) {
         is State.Initial -> MoviesEmpty(modifier)
         is State.Loading -> MoviesLoading(modifier)
-        is State.Error -> MoviesError(currentState.error, modifier)
-        is State.Success -> Movies(currentState.movies, modifier)
+        is State.Error -> MoviesError(currentState.error)
+        is State.Success -> Movies(currentState.movies, onClick = { onMovieClick(it) }, modifier)
     }
 }
 
@@ -64,7 +66,7 @@ internal fun MoviesLoading(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun MoviesError(error: Throwable, modifier: Modifier = Modifier) {
+internal fun MoviesError(error: Throwable) {
     val text = error.localizedMessage
     val toast = Toast.makeText(LocalContext.current, text, Toast.LENGTH_SHORT)
     toast.show()
@@ -74,6 +76,7 @@ internal fun MoviesError(error: Throwable, modifier: Modifier = Modifier) {
 @Composable
 internal fun Movies(
     @PreviewParameter(MoviesPreviewProvider::class) movies: List<Movie>,
+    onClick: (Movie) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
@@ -85,20 +88,21 @@ internal fun Movies(
     ) {
         items(movies) { movie ->
             key(movie.id) {
-                Movie(movie)
+                Movie(movie, onClick = { onClick(movie) })
             }
         }
     }
 }
 
 @Composable
-internal fun Movie(movie: Movie, modifier: Modifier = Modifier) {
+internal fun Movie(movie: Movie, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Surface(
         shadowElevation = 8.dp,
         color = MaterialTheme.colorScheme.background,
         modifier = modifier
             .fillMaxWidth()
-            .height(180.dp),
+            .height(180.dp)
+            .clickable(onClick = onClick),
     ) { }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -128,6 +132,6 @@ internal fun MoviePreview() {
             overview = "",
             rating = 1.0f,
             posterLink = "",
-        )
+        ), onClick = {}
     )
 }

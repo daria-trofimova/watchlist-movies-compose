@@ -10,6 +10,7 @@ import com.watchlist.movies.R
 internal sealed class Screen(val route: String) {
     object Home : Screen("home")
     object Favorites : Screen("favorites")
+    object MovieDetails : Screen("movie_details/{MOVIE_ID}")
     class TopLevelScreen(screen: Screen, @StringRes val label: Int, val icon: ImageVector) :
         Screen(screen.route)
 }
