@@ -43,7 +43,6 @@ android {
 dependencies {
     implementation(project(":data:movies"))
     implementation(libs.androidx.core.ktx)
-    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.espresso.core)
@@ -51,7 +50,6 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.tooling.preview)
     debugImplementation(libs.androidx.ui.tooling)
-    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
@@ -61,5 +59,4 @@ dependencies {
 
     implementation(libs.dagger.hilt)
     ksp(libs.dagger.hilt.compiler)
-    implementation(libs.jakarta.inject)
 }
