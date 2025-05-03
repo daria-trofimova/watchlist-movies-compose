@@ -7,12 +7,27 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.watchlist.movies.R
 
-internal sealed class Screen(val route: String) {
-    object Home : Screen("home")
-    object Favorites : Screen("favorites")
-    object MovieDetails : Screen("movie_details/{MOVIE_ID}")
+internal sealed class Screen(val route: String, @StringRes val title: Int) {
+    object Home : Screen("home", title = R.string.home)
+    object Favorites : Screen("favorites", title = R.string.favorites)
+    class MovieDetails : Screen("$prefix/{$parameter}", title = R.string.movie_details) {
+        companion object {
+            const val prefix: String = "movieDetails"
+            const val parameter: String = "MOVIE_ID"
+        }
+    }
+
     class TopLevelScreen(screen: Screen, @StringRes val label: Int, val icon: ImageVector) :
-        Screen(screen.route)
+        Screen(screen.route, screen.title)
+
+    companion object {
+        fun from(route: String): Screen = when {
+            route == Home.route -> Home
+            route == Favorites.route -> Favorites
+            route.startsWith(MovieDetails.prefix) -> MovieDetails()
+            else -> throw Throwable("Unknown route")
+        }
+    }
 }
 
 internal val topLevelScreens = listOf(
