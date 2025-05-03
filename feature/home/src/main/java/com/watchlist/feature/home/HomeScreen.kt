@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.watchlist.core.ui.MoviePoster
 import com.watchlist.feature.home.model.Movie
 
 @Composable
@@ -108,9 +109,11 @@ internal fun Movie(movie: Movie, onClick: () -> Unit, modifier: Modifier = Modif
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ) {
-        MoviePoster(movie.posterLink, modifier = Modifier
-            .fillMaxWidth()
-            .height(100.dp))
+        MoviePoster(
+            movie.posterLink, modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+        )
         Text(
             text = movie.title,
             maxLines = 2,

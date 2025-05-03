@@ -46,6 +46,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:ui"))
     implementation(project(":data:movies"))
     implementation(project(":tmdb"))
     implementation(project(":database"))

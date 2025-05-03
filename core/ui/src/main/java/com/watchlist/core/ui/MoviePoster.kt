@@ -1,4 +1,4 @@
-package com.watchlist.feature.home
+package com.watchlist.core.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -14,10 +14,10 @@ import coil3.compose.LocalAsyncImagePreviewHandler
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-internal fun MoviePoster(posterLink: String, modifier: Modifier = Modifier) {
+fun MoviePoster(posterLink: String, modifier: Modifier = Modifier) {
     CompositionLocalProvider(LocalAsyncImagePreviewHandler provides previewHandler) {
         AsyncImage(
-            model = BuildConfig.TMDB_IMAGES_BASE_URL + posterLink,
+            model = "http://image.tmdb.org/t/p/w500$posterLink",
             contentDescription = null,
             modifier = modifier,
         )

@@ -14,10 +14,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.watchlist.core.ui.theme.MoviesAppTheme
 import com.watchlist.feature.home.HomeScreen
 import com.watchlist.feature.moviedetails.MovieDetailsScreen
 import com.watchlist.movies.ui.navigation.Screen
-import com.watchlist.movies.ui.theme.MoviesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
