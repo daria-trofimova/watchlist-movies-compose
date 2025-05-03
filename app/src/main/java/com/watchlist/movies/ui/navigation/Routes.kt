@@ -10,9 +10,9 @@ import com.watchlist.movies.R
 internal sealed class Screen(val route: String, @StringRes val title: Int) {
     object Home : Screen("home", title = R.string.home)
     object Favorites : Screen("favorites", title = R.string.favorites)
-    class MovieDetails : Screen("$prefix/{$parameter}", title = R.string.movie_details) {
+    class MovieDetails : Screen("$path/{$parameter}", title = R.string.movie_details) {
         companion object {
-            const val prefix: String = "movieDetails"
+            const val path: String = "movieDetails"
             const val parameter: String = "MOVIE_ID"
         }
     }
@@ -24,7 +24,7 @@ internal sealed class Screen(val route: String, @StringRes val title: Int) {
         fun from(route: String): Screen = when {
             route == Home.route -> Home
             route == Favorites.route -> Favorites
-            route.startsWith(MovieDetails.prefix) -> MovieDetails()
+            route.startsWith(MovieDetails.path) -> MovieDetails()
             else -> throw Throwable("Unknown route")
         }
     }

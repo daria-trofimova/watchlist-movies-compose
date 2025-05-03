@@ -43,10 +43,14 @@ fun HomeScreen(
 ) {
     val state by viewModel.state.collectAsState()
     when (val currentState = state) {
-        is State.Initial -> MoviesEmpty(modifier)
-        is State.Loading -> MoviesLoading(modifier)
-        is State.Error -> MoviesError(currentState.error)
-        is State.Success -> Movies(currentState.movies, onClick = { onMovieClick(it) }, modifier)
+        is HomeUiState.Initial -> MoviesEmpty(modifier)
+        is HomeUiState.Loading -> MoviesLoading(modifier)
+        is HomeUiState.Error -> MoviesError(currentState.error)
+        is HomeUiState.Success -> Movies(
+            currentState.movies,
+            onClick = { onMovieClick(it) },
+            modifier
+        )
     }
 }
 

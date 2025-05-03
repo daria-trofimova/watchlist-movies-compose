@@ -38,7 +38,7 @@ fun MoviesApp() {
         ) {
             composable(route = Screen.Home.route) {
                 HomeScreen(onMovieClick = { movie ->
-                    navController.navigate("${Screen.MovieDetails.prefix}/${movie.id}")
+                    navController.navigate("${Screen.MovieDetails.path}/${movie.id}")
                 })
             }
             composable(
