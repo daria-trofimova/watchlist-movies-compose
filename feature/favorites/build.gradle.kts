@@ -7,13 +7,14 @@ plugins {
 }
 
 android {
-    namespace = "com.watchlist.feature.home"
+    namespace = "com.watchlist.feature.favorites"
     compileSdk = 35
 
     defaultConfig {
         minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {

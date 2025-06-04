@@ -52,6 +52,7 @@ dependencies {
     implementation(project(":database"))
     implementation(project(":feature:home"))
     implementation(project(":feature:movieDetails"))
+    implementation(project(":feature:favorites"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
     implementation(libs.dagger.hilt)

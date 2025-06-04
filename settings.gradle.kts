@@ -20,10 +20,11 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Movies"
+include(":core:ui")
 include(":app")
 include(":tmdb")
 include(":database")
 include(":data:movies")
 include(":feature:home")
 include(":feature:movieDetails")
-include(":core:ui")
+include(":feature:favorites")
