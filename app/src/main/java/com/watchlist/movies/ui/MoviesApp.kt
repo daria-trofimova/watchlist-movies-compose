@@ -20,14 +20,16 @@ import com.watchlist.movies.ui.navigation.Screen
 fun MoviesApp() {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
-    val currentScreen =
-        backStackEntry?.destination?.route?.let { Screen.from(it) } ?: Screen.Home
+    val currentScreen = backStackEntry?.destination?.route?.let { route ->
+        Screen.from(route, backStackEntry?.arguments)
+    } ?: Screen.Home
+    val screenTitle = currentScreen.title
     Scaffold(
         topBar = {
             MoviesTopAppBar(
                 canNavigateBack = navController.previousBackStackEntry != null,
                 navigateUp = { navController.navigateUp() },
-                title = currentScreen.title
+                title = screenTitle.resolve()
             )
         },
         bottomBar = { MoviesNavigationBar(navController = navController) }
@@ -37,25 +39,31 @@ fun MoviesApp() {
             startDestination = Screen.Home.route,
             modifier = Modifier.padding(padding),
         ) {
-            composable(route = Screen.Home.route) {
+            composable(Screen.Home.route) {
                 HomeScreen(onMovieClick = { movie ->
-                    navController.navigate("${Screen.MovieDetails.path}/${movie.id}")
+                    navController.navigate(
+                        Screen.MovieDetails.createRoute(
+                            id = movie.id,
+                            title = movie.title
+                        )
+                    )
                 })
+            }
+            composable(Screen.Favorites.route) {
+                FavoritesScreen()
             }
             composable(
-                route = Screen.MovieDetails().route,
-                arguments = listOf(navArgument(Screen.MovieDetails.parameter) {
-                    type =
-                        NavType.LongType
-                })
-            ) { backStackEntry ->
+                Screen.MovieDetails.ROUTE_PATTERN,
+                arguments = listOf(navArgument(Screen.MovieDetails.ID_ARGUMENT_KEY) {
+                    type = NavType.LongType
+                },
+                    navArgument(Screen.MovieDetails.TITLE_ARGUMENT_KEY) {
+                        type = NavType.StringType
+                    })
+            ) {
                 val movieId =
-                    backStackEntry.arguments?.getLong(Screen.MovieDetails.parameter)
-                        ?: 0
+                    backStackEntry?.arguments?.getLong(Screen.MovieDetails.ID_ARGUMENT_KEY)!!
                 MovieDetailsScreen(movieId = movieId)
-            }
-            composable(route = Screen.Favorites.route) {
-                FavoritesScreen()
             }
         }
     }

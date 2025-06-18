@@ -1,36 +1,79 @@
 package com.watchlist.movies.ui.navigation
 
+import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import com.watchlist.movies.R
 
-internal sealed class Screen(val route: String, @StringRes val title: Int) {
-    object Home : Screen("home", title = R.string.home)
-    object Favorites : Screen("favorites", title = R.string.favorites)
-    class MovieDetails : Screen("$path/{$parameter}", title = R.string.movie_details) {
-        companion object {
-            const val path: String = "movieDetails"
-            const val parameter: String = "MOVIE_ID"
+internal sealed class Screen(val route: String) {
+
+    sealed interface Title {
+        @JvmInline
+        value class Resource(@StringRes val id: Int) : Title
+
+        @JvmInline
+        value class Text(val text: String) : Title
+
+        @Composable
+        fun resolve(): String = when (this) {
+            is Resource -> stringResource(id)
+            is Text -> text
         }
     }
 
-    class TopLevelScreen(screen: Screen, @StringRes val label: Int, val icon: ImageVector) :
-        Screen(screen.route, screen.title)
+    abstract val title: Title
+
+    data object Home : Screen(route = "home") {
+        override val title: Title = Title.Resource(R.string.home)
+    }
+
+    data object Favorites : Screen(route = "favorites") {
+        override val title: Title = Title.Resource(R.string.favorites)
+    }
+
+    class MovieDetails(val id: Long, title: String) : Screen(route = ROUTE) {
+        override val title: Title = Title.Text(title)
+
+        companion object {
+            const val ROUTE = "movieDetails"
+            const val ID_ARGUMENT_KEY = "id"
+            const val TITLE_ARGUMENT_KEY = "title"
+            const val ROUTE_PATTERN = "$ROUTE/{$ID_ARGUMENT_KEY}/{$TITLE_ARGUMENT_KEY}"
+            fun createRoute(id: Long, title: String): String {
+                return "$ROUTE/$id/$title"
+            }
+        }
+    }
 
     companion object {
-        fun from(route: String): Screen = when {
-            route == Home.route -> Home
-            route == Favorites.route -> Favorites
-            route.startsWith(MovieDetails.path) -> MovieDetails()
-            else -> throw Throwable("Unknown route")
-        }
+        // TODO: refactor
+        fun from(route: String, arguments: Bundle? = null): Screen =
+            when {
+                route == Home.route -> Home
+                route == Favorites.route -> Favorites
+                route.startsWith(MovieDetails.ROUTE) -> {
+                    val id = arguments?.getLong(MovieDetails.ID_ARGUMENT_KEY)!!
+                    val title = arguments.getString(MovieDetails.TITLE_ARGUMENT_KEY) ?: ""
+                    MovieDetails(id, title)
+                }
+
+                else -> {
+                    throw IllegalArgumentException()
+                }
+            }
+    }
+
+    class NavigationBarScreen(screen: Screen, val icon: ImageVector) : Screen(screen.route) {
+        override val title: Title = screen.title
     }
 }
 
-internal val topLevelScreens = listOf(
-    Screen.TopLevelScreen(Screen.Home, label = R.string.home, Icons.Default.Home),
-    Screen.TopLevelScreen(Screen.Favorites, label = R.string.favorites, Icons.Default.Favorite)
+internal val navigationBarScreens = listOf(
+    Screen.NavigationBarScreen(Screen.Home, Icons.Default.Home),
+    Screen.NavigationBarScreen(Screen.Favorites, Icons.Default.Favorite)
 )

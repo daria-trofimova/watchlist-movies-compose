@@ -8,12 +8,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.watchlist.movies.ui.navigation.topLevelScreens
+import com.watchlist.movies.ui.navigation.navigationBarScreens
 
 @Composable
 @Preview
@@ -22,10 +21,10 @@ internal fun MoviesNavigationBar(
     navController: NavHostController = rememberNavController()
 ) {
     NavigationBar(modifier = modifier.fillMaxWidth()) {
-        topLevelScreens.forEach { screen ->
+        navigationBarScreens.forEach { screen ->
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val currentRoute = navBackStackEntry?.destination?.route
-            NavigationBarItem(selected = currentRoute == screen.route,
+            NavigationBarItem(currentRoute == screen.route,
                 onClick = {
                     if (currentRoute != screen.route)
                         navController.navigate(screen.route) {
@@ -38,10 +37,9 @@ internal fun MoviesNavigationBar(
                 }, icon = {
                     Icon(
                         imageVector = screen.icon,
-                        contentDescription = "",
+                        contentDescription = "", // TODO
                     )
-                }, label = { Text(text = stringResource(screen.label)) })
-
+                }, label = { Text(text = screen.title.resolve()) })
         }
     }
 }
