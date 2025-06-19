@@ -1,10 +1,8 @@
 package com.watchlist.feature.home
 
 import android.widget.Toast
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,9 +13,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -101,17 +98,10 @@ internal fun Movies(
 
 @Composable
 internal fun Movie(movie: Movie, onClick: () -> Unit, modifier: Modifier = Modifier) {
-    Surface(
-        shadowElevation = 8.dp,
-        color = MaterialTheme.colorScheme.background,
-        modifier = modifier
+    Card(
+        onClick = onClick, modifier = modifier
             .fillMaxWidth()
             .height(180.dp)
-            .clickable(onClick = onClick),
-    ) { }
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
     ) {
         MoviePoster(
             movie.posterLink, modifier = Modifier
