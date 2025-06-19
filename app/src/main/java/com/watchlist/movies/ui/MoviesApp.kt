@@ -31,7 +31,7 @@ fun MoviesApp() {
             MoviesTopAppBar(
                 canNavigateBack = canNavigateBack,
                 navigateUp = { navController.navigateUp() },
-                title = screenTitle.resolve()
+                title = screenTitle.asString()
             )
         },
         bottomBar = { MoviesNavigationBar(navController = navController) }
@@ -64,7 +64,8 @@ fun MoviesApp() {
                     })
             ) { backStackEntry ->
                 val movieId =
-                    backStackEntry.arguments?.getLong(Screen.MovieDetails.ID_ARGUMENT_KEY)!!
+                    backStackEntry.arguments?.getLong(Screen.MovieDetails.ID_ARGUMENT_KEY)
+                        ?: throw IllegalStateException("Missing required argument: ${Screen.MovieDetails.ID_ARGUMENT_KEY}")
                 MovieDetailsScreen(movieId = movieId)
             }
         }

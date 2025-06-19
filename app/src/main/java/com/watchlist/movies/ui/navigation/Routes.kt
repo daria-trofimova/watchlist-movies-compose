@@ -20,7 +20,7 @@ internal sealed class Screen(val route: String) {
         value class Text(val text: String) : Title
 
         @Composable
-        fun resolve(): String = when (this) {
+        fun asString(): String = when (this) {
             is Resource -> stringResource(id)
             is Text -> text
         }
@@ -54,20 +54,19 @@ internal sealed class Screen(val route: String) {
     }
 
     companion object {
-        // TODO: refactor
         fun from(route: String, arguments: Bundle? = null): Screen =
             when {
                 route == Home.route -> Home
                 route == Favorites.route -> Favorites
                 route.startsWith(MovieDetails.ROUTE) -> {
-                    val id = arguments?.getLong(MovieDetails.ID_ARGUMENT_KEY)!!
-                    val title = arguments.getString(MovieDetails.TITLE_ARGUMENT_KEY) ?: ""
+                    val id = arguments?.getLong(MovieDetails.ID_ARGUMENT_KEY)
+                        ?: throw IllegalStateException("Missing required argument: ${MovieDetails.ID_ARGUMENT_KEY}")
+                    val title = arguments.getString(MovieDetails.TITLE_ARGUMENT_KEY)
+                        ?: throw IllegalStateException("Missing required argument: ${MovieDetails.TITLE_ARGUMENT_KEY}")
                     MovieDetails(id, title)
                 }
 
-                else -> {
-                    throw IllegalArgumentException()
-                }
+                else -> throw IllegalArgumentException("Unknown route: $route")
             }
     }
 }

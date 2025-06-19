@@ -39,7 +39,7 @@ internal fun MoviesNavigationBar(
                         imageVector = screen.icon,
                         contentDescription = "", // TODO
                     )
-                }, label = { Text(text = screen.title.resolve()) })
+                }, label = { Text(text = screen.title.asString()) })
         }
     }
 }
