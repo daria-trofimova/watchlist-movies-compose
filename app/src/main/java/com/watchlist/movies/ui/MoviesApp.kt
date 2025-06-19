@@ -24,10 +24,12 @@ fun MoviesApp() {
         Screen.from(route, backStackEntry?.arguments)
     } ?: Screen.Home
     val screenTitle = currentScreen.title
+    val isNavigationBarScreen = currentScreen is Screen.NavigationBarScreen
+    val canNavigateBack = !isNavigationBarScreen && navController.previousBackStackEntry != null
     Scaffold(
         topBar = {
             MoviesTopAppBar(
-                canNavigateBack = navController.previousBackStackEntry != null,
+                canNavigateBack = canNavigateBack,
                 navigateUp = { navController.navigateUp() },
                 title = screenTitle.resolve()
             )
@@ -60,9 +62,9 @@ fun MoviesApp() {
                     navArgument(Screen.MovieDetails.TITLE_ARGUMENT_KEY) {
                         type = NavType.StringType
                     })
-            ) {
+            ) { backStackEntry ->
                 val movieId =
-                    backStackEntry?.arguments?.getLong(Screen.MovieDetails.ID_ARGUMENT_KEY)!!
+                    backStackEntry.arguments?.getLong(Screen.MovieDetails.ID_ARGUMENT_KEY)!!
                 MovieDetailsScreen(movieId = movieId)
             }
         }

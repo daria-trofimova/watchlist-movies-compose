@@ -28,11 +28,14 @@ internal sealed class Screen(val route: String) {
 
     abstract val title: Title
 
-    data object Home : Screen(route = "home") {
+    abstract class NavigationBarScreen(route: String, val icon: ImageVector) : Screen(route)
+
+    data object Home : NavigationBarScreen(route = "home", icon = Icons.Default.Home) {
         override val title: Title = Title.Resource(R.string.home)
     }
 
-    data object Favorites : Screen(route = "favorites") {
+    data object Favorites :
+        NavigationBarScreen(route = "favorites", icon = Icons.Default.Favorite) {
         override val title: Title = Title.Resource(R.string.favorites)
     }
 
@@ -67,13 +70,6 @@ internal sealed class Screen(val route: String) {
                 }
             }
     }
-
-    class NavigationBarScreen(screen: Screen, val icon: ImageVector) : Screen(screen.route) {
-        override val title: Title = screen.title
-    }
 }
 
-internal val navigationBarScreens = listOf(
-    Screen.NavigationBarScreen(Screen.Home, Icons.Default.Home),
-    Screen.NavigationBarScreen(Screen.Favorites, Icons.Default.Favorite)
-)
+internal val navigationBarScreens = listOf(Screen.Home, Screen.Favorites)
