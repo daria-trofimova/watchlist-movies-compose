@@ -5,6 +5,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import coil3.ColorImage
 import coil3.annotation.ExperimentalCoilApi
@@ -14,21 +15,21 @@ import coil3.compose.LocalAsyncImagePreviewHandler
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun MoviePoster(posterLink: String, modifier: Modifier = Modifier) {
+fun MoviePoster(posterLink: String, contentScale: ContentScale, modifier: Modifier = Modifier) {
     CompositionLocalProvider(LocalAsyncImagePreviewHandler provides previewHandler) {
         AsyncImage(
-            model = "http://image.tmdb.org/t/p/w500$posterLink",
+            model = "http://image.tmdb.org/t/p/w300$posterLink",
             contentDescription = null,
+            contentScale = contentScale,
             modifier = modifier,
         )
     }
 }
 
-
 @Composable
 @Preview(widthDp = 100, heightDp = 150)
 internal fun MoviePosterPreview() {
-    MoviePoster("")
+    MoviePoster("", ContentScale.FillWidth)
 }
 
 @OptIn(ExperimentalCoilApi::class)
