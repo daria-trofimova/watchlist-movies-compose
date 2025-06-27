@@ -37,6 +37,10 @@ android {
     }
 }
 
+kotlin {
+    explicitApiWarning()
+}
+
 dependencies {
     implementation(project(":core:ui"))
     implementation(project(":data:movies"))

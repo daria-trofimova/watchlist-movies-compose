@@ -32,6 +32,10 @@ android {
     }
 }
 
+kotlin {
+    explicitApiWarning()
+}
+
 dependencies {
     implementation(project(":tmdb"))
     implementation(project(":database"))

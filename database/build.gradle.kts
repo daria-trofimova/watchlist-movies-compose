@@ -33,6 +33,10 @@ android {
     }
 }
 
+kotlin {
+    explicitApiWarning()
+}
+
 dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

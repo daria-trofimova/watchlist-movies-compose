@@ -32,9 +32,8 @@ kotlin {
     sourceSets.getByName("main").kotlin.srcDir(outputDir)
 }
 
-// Ensure the secrets generation task runs before Kotlin compilation
-tasks.named("compileKotlin") {
-    dependsOn("generateSecrets")
+kotlin {
+    explicitApiWarning()
 }
 
 dependencies {
@@ -44,4 +43,9 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.annotation)
     implementation(libs.kotlinx.coroutines.core)
+}
+
+// Ensure the secrets generation task runs before Kotlin compilation
+tasks.named("compileKotlin") {
+    dependsOn("generateSecrets")
 }
