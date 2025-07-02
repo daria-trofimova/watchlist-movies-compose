@@ -36,7 +36,7 @@ import com.watchlist.core.ui.MoviePoster
 import com.watchlist.feature.home.model.Movie
 
 @Composable
-fun HomeScreen(
+public fun HomeScreen(
     modifier: Modifier = Modifier,
     onMovieClick: (Movie) -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),

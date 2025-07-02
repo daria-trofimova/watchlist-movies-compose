@@ -2,10 +2,10 @@ package com.watchlist.tmdb.model
 
 import com.google.gson.annotations.SerializedName
 
-class Movie(
-    @SerializedName("id") val id: Long,
-    @SerializedName("title") val title: String,
-    @SerializedName("overview") val overview: String,
-    @SerializedName("vote_average") val voteAverage: Float,
-    @SerializedName("poster_path") val posterPath: String,
+public class Movie(
+    @SerializedName("id") public val id: Long,
+    @SerializedName("title") public val title: String,
+    @SerializedName("overview") public val overview: String,
+    @SerializedName("vote_average") public val voteAverage: Float,
+    @SerializedName("poster_path") public val posterPath: String,
 )

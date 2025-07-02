@@ -9,7 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
-fun FavoritesScreen(modifier: Modifier = Modifier) {
+public fun FavoritesScreen(modifier: Modifier = Modifier) {
     Column {
         Text(text = stringResource(id = R.string.favorites))
     }

@@ -21,7 +21,7 @@ import com.watchlist.core.ui.MoviePosterFullscreen
 import com.watchlist.data.movies.model.Movie
 
 @Composable
-fun MovieDetailsScreen(movieId: Long, modifier: Modifier = Modifier) {
+public fun MovieDetailsScreen(movieId: Long, modifier: Modifier = Modifier) {
     val viewModel = hiltViewModel<MovieDetailsViewModel, MovieDetailsViewModel.Factory> { factory ->
         factory.create(movieId = movieId)
     }
@@ -33,7 +33,7 @@ fun MovieDetailsScreen(movieId: Long, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Movie(movie: Movie, modifier: Modifier = Modifier) {
+internal fun Movie(movie: Movie, modifier: Modifier = Modifier) {
     val isFullScreen = remember { mutableStateOf(false) }
     Column(
         modifier = modifier
@@ -57,7 +57,7 @@ fun Movie(movie: Movie, modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-fun MoviePreview() {
+internal fun MoviePreview() {
     Movie(
         Movie(
             id = 100,

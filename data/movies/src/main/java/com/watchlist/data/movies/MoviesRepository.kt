@@ -9,12 +9,12 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
-class MoviesRepository @Inject constructor(
+public class MoviesRepository @Inject constructor(
     private val moviesDatabase: MoviesDatabase,
     private val tmdbClient: TmdbClient,
 ) {
 
-    fun getMovies(): Flow<Result<List<Movie>>> =
+    public fun getMovies(): Flow<Result<List<Movie>>> =
         flow {
             val cachedMovies =
                 moviesDatabase.moviesDao().loadAll().map { it.map { Movie.from(it) } }.firstOrNull()
@@ -33,7 +33,7 @@ class MoviesRepository @Inject constructor(
         }
 
     // TODO: fetch new data from remote
-    fun getMovieStream(
+    public fun getMovieStream(
         id: Long,
     ): Flow<Movie> = moviesDatabase.moviesDao().loadMovie(id).map { Movie.from(it) }
 }

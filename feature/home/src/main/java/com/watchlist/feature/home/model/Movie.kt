@@ -2,7 +2,7 @@ package com.watchlist.feature.home.model
 
 import java.util.Locale
 
-data class Movie(
+public data class Movie(
     val id: Long,
     val title: String,
     val overview: String,

@@ -2,46 +2,48 @@ package com.watchlist.core.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
-val LocalBarsVisibilityController = compositionLocalOf<BarsVisibilityController> {
-    error("BarsVisibilityController not provided.")
-}
+public val LocalBarsVisibilityController: ProvidableCompositionLocal<BarsVisibilityController> =
+    compositionLocalOf {
+        error("BarsVisibilityController not provided.")
+    }
 
 // TODO: implement Saver for rememberSaveable
-class BarsVisibilityController {
-    val topBar = BarVisibilityController()
-    val bottomBar = BarVisibilityController()
+public class BarsVisibilityController {
+    public val topBar: BarVisibilityController = BarVisibilityController()
+    public val bottomBar: BarVisibilityController = BarVisibilityController()
 
-    fun hideAll() {
+    public fun hideAll() {
         topBar.hide()
         bottomBar.hide()
     }
 
-    fun showAll() {
+    public fun showAll() {
         topBar.show()
         bottomBar.show()
     }
 }
 
-class BarVisibilityController {
-    var isVisible: Boolean by mutableStateOf(true)
+public class BarVisibilityController {
+    public var isVisible: Boolean by mutableStateOf(true)
         private set
 
-    fun show() {
+    public fun show() {
         isVisible = true
     }
 
-    fun hide() {
+    public fun hide() {
         isVisible = false
     }
 }
 
 @Composable
-fun BarsVisibilityController.showOnDispose() {
+public fun BarsVisibilityController.showOnDispose() {
     DisposableEffect(Unit) {
         onDispose { showAll() }
     }

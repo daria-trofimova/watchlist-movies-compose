@@ -241,19 +241,19 @@ private val highContrastDarkColorScheme = darkColorScheme(
 )
 
 @Immutable
-data class ColorFamily(
+public data class ColorFamily(
     val color: Color,
     val onColor: Color,
     val colorContainer: Color,
     val onColorContainer: Color
 )
 
-val unspecified_scheme = ColorFamily(
+public val unspecified_scheme = ColorFamily(
     Color.Unspecified, Color.Unspecified, Color.Unspecified, Color.Unspecified
 )
 
 @Composable
-fun MoviesAppTheme(
+public fun MoviesAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

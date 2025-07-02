@@ -19,7 +19,11 @@ import me.saket.telephoto.zoomable.coil3.ZoomableAsyncImage
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun MoviePoster(posterLink: String, contentScale: ContentScale, modifier: Modifier = Modifier) {
+public fun MoviePoster(
+    posterLink: String,
+    contentScale: ContentScale,
+    modifier: Modifier = Modifier
+) {
     CompositionLocalProvider(LocalAsyncImagePreviewHandler provides previewHandler) {
         AsyncImage(
             model = "http://image.tmdb.org/t/p/w300$posterLink",
@@ -42,7 +46,7 @@ internal val previewHandler = AsyncImagePreviewHandler {
 }
 
 @Composable
-fun MoviePosterFullscreen(posterLink: String, modifier: Modifier = Modifier) {
+public fun MoviePosterFullscreen(posterLink: String, modifier: Modifier = Modifier) {
     val barsVisibilityController = LocalBarsVisibilityController.current
     barsVisibilityController.hideAll()
     barsVisibilityController.showOnDispose()

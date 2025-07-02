@@ -11,10 +11,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object TmdbClientModule {
+public object TmdbClientModule {
 
     @Provides
     @Singleton
-    fun provideTmdbClient(@IoDispatcher dispatcher: CoroutineDispatcher): TmdbClient =
+    public fun provideTmdbClient(@IoDispatcher dispatcher: CoroutineDispatcher): TmdbClient =
         TmdbClient(baseUrl = BuildConfig.TMDB_BASE_URL, dispatcher = dispatcher)
 }

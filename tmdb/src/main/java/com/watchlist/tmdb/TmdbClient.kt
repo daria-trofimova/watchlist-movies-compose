@@ -3,12 +3,12 @@ package com.watchlist.tmdb
 import com.watchlist.tmdb.model.Movie
 import kotlinx.coroutines.CoroutineDispatcher
 
-interface TmdbClient {
+public interface TmdbClient {
 
-    suspend fun getMovies(): Result<List<Movie>>
+    public suspend fun getMovies(): Result<List<Movie>>
 }
 
-fun TmdbClient(
+public fun TmdbClient(
     baseUrl: String,
     dispatcher: CoroutineDispatcher,
 ): TmdbClient {

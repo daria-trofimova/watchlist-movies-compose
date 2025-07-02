@@ -7,18 +7,18 @@ import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface MoviesDao {
+public interface MoviesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(
+    public suspend fun insertAll(
         movies: List<Movie>,
     )
 
     @Query("SELECT * FROM movie")
-    fun loadAll(): Flow<List<Movie>>
+    public fun loadAll(): Flow<List<Movie>>
 
     @Query("SELECT * FROM movie WHERE id = :id")
-    fun loadMovie(
+    public fun loadMovie(
         id: Long,
     ): Flow<Movie>
 }

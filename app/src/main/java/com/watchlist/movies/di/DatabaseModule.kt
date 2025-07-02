@@ -10,10 +10,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DatabaseModule {
+public object DatabaseModule {
     @Provides
     @Singleton
-    fun provideMoviesDatabase(
+    public fun provideMoviesDatabase(
         application: Application,
     ): MoviesDatabase = MoviesDatabase(application)
 }
