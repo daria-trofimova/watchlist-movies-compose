@@ -12,8 +12,8 @@ public data class Movie(
 
     val ratingFormatted: String get() = String.format(Locale.US, "%.2f", rating)
 
-    companion object {
-        fun from(movie: com.watchlist.data.movies.model.Movie): Movie =
+    public companion object {
+        public fun from(movie: com.watchlist.data.movies.model.Movie): Movie =
             Movie(
                 id = movie.id,
                 title = movie.title,

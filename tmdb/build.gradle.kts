@@ -23,8 +23,8 @@ kotlin {
             outputDir.mkdirs()
             outputFile.writeText(
                 """
-                const val TMDB_API_KEY = $tmdbApiKey
-                const val TMDB_ACCOUNT_ID = $tmdbAccountId
+                internal const val TMDB_API_KEY = $tmdbApiKey
+                internal const val TMDB_ACCOUNT_ID = $tmdbAccountId
                 """.trimIndent()
             )
         }

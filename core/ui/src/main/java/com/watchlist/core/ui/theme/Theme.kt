@@ -248,7 +248,7 @@ public data class ColorFamily(
     val onColorContainer: Color
 )
 
-public val unspecified_scheme = ColorFamily(
+public val unspecified_scheme: ColorFamily = ColorFamily(
     Color.Unspecified, Color.Unspecified, Color.Unspecified, Color.Unspecified
 )
 

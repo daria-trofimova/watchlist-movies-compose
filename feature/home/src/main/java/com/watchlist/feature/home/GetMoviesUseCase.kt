@@ -9,5 +9,5 @@ import javax.inject.Inject
 public class GetMoviesUseCase @Inject constructor(
     private val moviesRepository: MoviesRepository,
 ) {
-    operator fun invoke(): Flow<Result<List<Movie>>> = moviesRepository.getMovies()
+    public operator fun invoke(): Flow<Result<List<Movie>>> = moviesRepository.getMovies()
 }
