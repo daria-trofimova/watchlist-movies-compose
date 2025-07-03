@@ -51,7 +51,7 @@ internal fun Movie(movie: Movie, modifier: Modifier = Modifier) {
         Text(text = movie.overview, modifier = Modifier.padding(8.dp))
     }
     if (isFullScreen.value) {
-        MoviePosterFullscreen(movie.posterLink)
+        MoviePosterFullscreen(movie.posterLink, onDismiss = { isFullScreen.value = false })
     }
 }
 
