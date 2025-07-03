@@ -33,7 +33,7 @@ kotlin {
 }
 
 kotlin {
-    explicitApiWarning()
+    explicitApi()
 }
 
 dependencies {
