@@ -16,5 +16,9 @@ public object TmdbClientModule {
     @Provides
     @Singleton
     public fun provideTmdbClient(@IoDispatcher dispatcher: CoroutineDispatcher): TmdbClient =
-        TmdbClient(baseUrl = BuildConfig.TMDB_BASE_URL, dispatcher = dispatcher)
+        TmdbClient(
+            baseUrl = BuildConfig.TMDB_BASE_URL,
+            apiKey = BuildConfig.TMDB_API_KEY,
+            dispatcher = dispatcher,
+        )
 }

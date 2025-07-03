@@ -10,8 +10,9 @@ public interface TmdbClient {
 
 public fun TmdbClient(
     baseUrl: String,
+    apiKey: String,
     dispatcher: CoroutineDispatcher,
 ): TmdbClient {
-    val tmdbApi = TmdbApi(baseUrl)
+    val tmdbApi = TmdbApi(baseUrl, apiKey)
     return TmdbClientImpl(tmdbApi, dispatcher)
 }

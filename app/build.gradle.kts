@@ -21,6 +21,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "TMDB_BASE_URL", "\"https://api.themoviedb.org/3/\"")
+        buildConfigField("String", "TMDB_API_KEY", rootProject.extra["TMDB_API_KEY"].toString())
     }
 
     buildTypes {

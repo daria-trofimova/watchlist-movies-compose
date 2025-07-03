@@ -1,6 +1,5 @@
 package com.watchlist.tmdb
 
-import TMDB_API_KEY
 import com.watchlist.tmdb.model.Movies
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -24,6 +23,7 @@ internal interface TmdbApi {
 
 internal fun TmdbApi(
     baseUrl: String,
+    apiKey: String,
 ): TmdbApi {
     val loggingInterceptor = HttpLoggingInterceptor()
     loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -32,7 +32,7 @@ internal fun TmdbApi(
             val request: Request = chain.request()
                 .newBuilder()
                 .header("Accept", "application/json")
-                .header("Authorization", "Bearer $TMDB_API_KEY")
+                .header("Authorization", "Bearer $apiKey")
                 .build()
             chain.proceed(request)
         }
