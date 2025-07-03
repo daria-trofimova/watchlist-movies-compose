@@ -2,6 +2,7 @@ package com.watchlist.movies.di
 
 import com.watchlist.movies.BuildConfig
 import com.watchlist.tmdb.TmdbClient
+import com.watchlist.tmdb.TmdbImageUrlProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,4 +22,9 @@ public object TmdbClientModule {
             apiKey = BuildConfig.TMDB_API_KEY,
             dispatcher = dispatcher,
         )
+
+    @Provides
+    @Singleton
+    public fun provideTmdbImageUrlProvider(): TmdbImageUrlProvider =
+        TmdbImageUrlProvider(imageBaseUrl = BuildConfig.TMDB_IMAGE_BASE_URL)
 }

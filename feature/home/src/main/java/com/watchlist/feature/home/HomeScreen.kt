@@ -35,10 +35,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.watchlist.core.ui.MoviePoster
 import com.watchlist.feature.home.model.Movie
 
+public data class MovieInfo(
+    val id: Long,
+    val title: String
+)
+
 @Composable
 public fun HomeScreen(
     modifier: Modifier = Modifier,
-    onMovieClick: (Movie) -> Unit,
+    onMovieClick: (MovieInfo) -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
@@ -49,7 +54,7 @@ public fun HomeScreen(
         is HomeUiState.Success -> Movies(
             currentState.movies,
             modifier,
-            onClick = { onMovieClick(it) },
+            onClick = { onMovieClick(MovieInfo(id = it.id, title = it.title)) },
         )
     }
 }
@@ -114,7 +119,7 @@ internal fun Movie(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             MoviePoster(
-                movie.posterLink,
+                movie.poster.previewLink,
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier,
             )
@@ -139,9 +144,8 @@ internal fun MoviePreview() {
         Movie(
             id = 100,
             title = "Titanic",
-            overview = "",
             rating = 1.0f,
-            posterLink = "",
+            poster = Movie.Poster(""),
         ), onClick = {}
     )
 }

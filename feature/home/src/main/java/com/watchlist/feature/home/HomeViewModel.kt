@@ -16,7 +16,7 @@ public class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState.Initial())
-    public val state: StateFlow<HomeUiState> = _state
+    internal val state: StateFlow<HomeUiState> = _state
 
     init {
         viewModelScope.launch {
@@ -27,23 +27,24 @@ public class HomeViewModel @Inject constructor(
     }
 }
 
-public sealed class HomeUiState {
-    public data class Initial(val movies: List<Movie> = emptyList()) : HomeUiState()
-    public data class Loading(val movies: List<Movie> = emptyList()) : HomeUiState()
-    public class Error(public val error: Throwable, public val movies: List<Movie> = emptyList()) :
+internal sealed class HomeUiState {
+    data class Initial(val movies: List<Movie> = emptyList()) : HomeUiState()
+    data class Loading(val movies: List<Movie> = emptyList()) : HomeUiState()
+    class Error(val error: Throwable, val movies: List<Movie> = emptyList()) :
         HomeUiState()
 
-    public class Success(public val movies: List<Movie>) : HomeUiState()
+    class Success(val movies: List<Movie>) : HomeUiState()
 
-    public companion object {
-        public fun from(result: Result<List<com.watchlist.data.movies.model.Movie>>): HomeUiState =
+    companion object {
+        fun from(result: Result<List<Movie>>): HomeUiState =
             when (result) {
-            is Result.InProgress -> Loading(result.data?.map { Movie.from(it) } ?: emptyList())
+                is Result.InProgress -> Loading(result.data ?: emptyList())
             is Result.Error -> Error(
                 error = result.error ?: Error("Unknown error"),
-                result.data?.map { Movie.from(it) } ?: emptyList())
+                result.data ?: emptyList()
+            )
 
-            is Result.Success -> Success(result.data.map { Movie.from(it) })
+                is Result.Success -> Success(result.data)
         }
     }
 }

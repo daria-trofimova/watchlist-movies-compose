@@ -9,30 +9,26 @@ internal class MoviesPreviewProvider : PreviewParameterProvider<List<Movie>> {
             Movie(
                 id = 100,
                 title = "Titanic",
-                overview = "",
                 rating = 1.0f,
-                posterLink = "",
+                poster = Movie.Poster(""),
             ),
             Movie(
                 id = 101,
                 title = " Titanic 1 Titanic 1 Titanic 1 Titanic 1 Titanic 1 Titanic 1",
-                overview = "",
                 rating = 1.0f,
-                posterLink = "",
+                poster = Movie.Poster(""),
             ),
             Movie(
                 id = 102,
                 title = "Titanic 2",
-                overview = "",
                 rating = 1.0f,
-                posterLink = "",
+                poster = Movie.Poster(""),
             ),
             Movie(
                 id = 103,
                 title = "Titanic 3",
-                overview = "",
                 rating = 1.0f,
-                posterLink = "",
+                poster = Movie.Poster(""),
             )
         )
     )

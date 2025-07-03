@@ -66,11 +66,11 @@ internal fun MoviesApp() {
                 modifier = Modifier.padding(padding),
             ) {
                 composable(Screen.Home.route) {
-                    HomeScreen(onMovieClick = { movie ->
+                    HomeScreen(onMovieClick = { movieInfo ->
                         navController.navigate(
                             Screen.MovieDetails.createRoute(
-                                id = movie.id,
-                                title = movie.title
+                                id = movieInfo.id,
+                                title = movieInfo.title
                             )
                         )
                     })
