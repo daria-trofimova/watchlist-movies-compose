@@ -70,7 +70,7 @@ internal fun MovieDetails(movieDetails: MovieDetails, modifier: Modifier = Modif
     }
     if (isFullScreen.value) {
         MoviePosterFullscreen(
-            movieDetails.poster.standardLink,
+            movieDetails.poster.highResLink,
             onDismiss = { isFullScreen.value = false })
     }
 }
@@ -90,7 +90,7 @@ internal fun MoviePreview() {
             id = 100,
             title = "Titanic",
             overview = "", rating = 3.2f,
-            poster = MovieDetails.Poster(""),
+            poster = MovieDetails.Poster("", ""),
         )
     )
 }

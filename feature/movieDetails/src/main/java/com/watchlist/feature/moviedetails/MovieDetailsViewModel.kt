@@ -28,8 +28,12 @@ internal class MovieDetailsViewModel @AssistedInject constructor(
     init {
         viewModelScope.launch {
             moviesRepository.getMovieStream(id = movieId).collect { movie ->
-                val image = imagesRepository.getImage(movie.posterLink, ImageSize.STANDARD)
-                val poster = MovieDetails.Poster(image.link)
+                val standardImage = imagesRepository.getImage(movie.posterLink, ImageSize.STANDARD)
+                val highResImage = imagesRepository.getImage(movie.posterLink, ImageSize.HIGH_RES)
+                val poster = MovieDetails.Poster(
+                    standardLink = standardImage.link,
+                    highResLink = highResImage.link
+                )
                 _state.emit(MovieDetailsUiState.Success(MovieDetails.from(movie, poster)))
             }
         }

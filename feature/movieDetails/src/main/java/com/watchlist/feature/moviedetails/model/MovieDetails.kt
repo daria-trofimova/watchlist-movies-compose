@@ -7,7 +7,7 @@ internal data class MovieDetails(
     val rating: Float,
     val poster: Poster,
 ) {
-    class Poster(val standardLink: String)
+    class Poster(val standardLink: String, val highResLink: String)
 
     companion object {
         fun from(movie: com.watchlist.data.movies.model.Movie, poster: Poster): MovieDetails =
