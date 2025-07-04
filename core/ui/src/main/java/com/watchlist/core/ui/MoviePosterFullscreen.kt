@@ -36,7 +36,7 @@ public fun MoviePosterFullscreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Transparent)
+            .background(Color.Black.copy(alpha = 0.5f))
             .offset { IntOffset(0, offsetY.roundToInt()) }
             .draggable(
                 orientation = Orientation.Vertical,

@@ -5,8 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
@@ -51,15 +51,16 @@ internal fun MovieDetailsLoading(modifier: Modifier = Modifier) {
 internal fun MovieDetails(movieDetails: MovieDetails, modifier: Modifier = Modifier) {
     val isFullScreen = remember { mutableStateOf(false) }
     Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
         MoviePoster(
             movieDetails.poster.standardLink,
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
-                .fillMaxWidth()
+                .width(200.dp)
                 .clickable { isFullScreen.value = true },
         )
         Text(text = movieDetails.overview, modifier = Modifier.padding(8.dp))
@@ -80,7 +81,7 @@ internal fun MovieDetailsError(error: Throwable) {
 
 @Preview
 @Composable
-internal fun MoviePreview() {
+internal fun MovieDetailsPreview() {
     MovieDetails(
         MovieDetails(
             id = 100,
