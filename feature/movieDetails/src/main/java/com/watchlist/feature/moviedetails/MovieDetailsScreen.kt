@@ -32,14 +32,10 @@ public fun MovieDetailsScreen(movieId: Long, modifier: Modifier = Modifier) {
         factory.create(movieId = movieId)
     }
     val state = viewModel.state.collectAsState()
-    val currentState = state.value
-    when (currentState) {
+    when (val currentState = state.value) {
         is MovieDetailsUiState.Initial -> MovieDetailsLoading(modifier)
         is MovieDetailsUiState.Success -> MovieDetails(currentState.movieDetails, modifier)
         is MovieDetailsUiState.Error -> MovieDetailsError(currentState.error)
-    }
-    if (currentState is MovieDetailsUiState.Success) {
-        MovieDetails(currentState.movieDetails, modifier)
     }
 }
 
