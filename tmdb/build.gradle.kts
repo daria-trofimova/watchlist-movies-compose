@@ -11,9 +11,6 @@ kotlin {
         jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
         freeCompilerArgs.add("-Xwhen-guards")
     }
-}
-
-kotlin {
     explicitApi()
 }
 
