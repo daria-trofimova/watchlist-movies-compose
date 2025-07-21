@@ -60,7 +60,7 @@ dependencies {
     implementation(project(":tmdb"))
     implementation(project(":database"))
     implementation(project(":feature:home"))
-    implementation(project(":feature:movieDetails"))
+    implementation(project(":feature:movie-details"))
     implementation(project(":feature:favorites"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
