@@ -11,29 +11,25 @@ internal class TmdbClientImpl(
 
     override suspend fun getMovies(): Result<List<Movie>> =
         withContext(dispatcher) {
-            try {
+            runCatching {
                 val response = tmdbApi.getPopularMovies()
                 if (response.isSuccessful) {
-                    Result.success(response.body()!!.results)
+                    response.body()?.results ?: emptyList()
                 } else {
-                    Result.failure(Exception("Error getting popular movies: ${response.code()}"))
+                    throw Exception("Error getting popular movies: ${response.code()}")
                 }
-            } catch (e: Exception) {
-                Result.failure(e)
             }
         }
 
     override suspend fun getMovie(id: Long): Result<Movie> =
         withContext(dispatcher) {
-            try {
+            runCatching {
                 val response = tmdbApi.getMovie(id)
                 if (response.isSuccessful) {
-                    Result.success(response.body()!!)
+                    response.body() ?: throw Exception("Movie not found")
                 } else {
-                    Result.failure(Exception("Error getting movie: ${response.code()}"))
+                    throw Exception("Error getting movie: ${response.code()}")
                 }
-            } catch (e: Exception) {
-                Result.failure(e)
             }
         }
 }
