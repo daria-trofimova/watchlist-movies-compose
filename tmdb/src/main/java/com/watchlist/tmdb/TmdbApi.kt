@@ -1,5 +1,6 @@
 package com.watchlist.tmdb
 
+import com.watchlist.tmdb.model.Movie
 import com.watchlist.tmdb.model.Movies
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -8,6 +9,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 /**
  * [Api documentation](https://developer.themoviedb.org/reference/intro/getting-started)
@@ -19,6 +21,9 @@ internal interface TmdbApi {
      * */
     @GET("movie/popular")
     suspend fun getPopularMovies(): Response<Movies>
+
+    @GET("movie/{id}")
+    suspend fun getMovie(@Path("id") id: Long): Response<Movie>
 }
 
 internal fun TmdbApi(

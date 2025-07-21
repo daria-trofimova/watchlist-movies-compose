@@ -6,6 +6,8 @@ import kotlinx.coroutines.CoroutineDispatcher
 public interface TmdbClient {
 
     public suspend fun getMovies(): Result<List<Movie>>
+
+    public suspend fun getMovie(id: Long): Result<Movie>
 }
 
 public fun TmdbClient(

@@ -22,19 +22,41 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.watchlist.core.ui.LocalBarsVisibilityController
 import com.watchlist.core.ui.MoviePoster
 import com.watchlist.core.ui.MoviePosterFullscreen
+import com.watchlist.core.ui.showOnDispose
 import com.watchlist.feature.moviedetails.model.MovieDetails
 
 @Composable
 public fun MovieDetailsScreen(movieId: Long, modifier: Modifier = Modifier) {
+    val barsVisibilityController = LocalBarsVisibilityController.current
+    barsVisibilityController.bottomBar.hide()
+    barsVisibilityController.showOnDispose()
+
     val viewModel = hiltViewModel<MovieDetailsViewModel, MovieDetailsViewModel.Factory> { factory ->
         factory.create(movieId = movieId)
     }
     val state = viewModel.state.collectAsState()
     when (val currentState = state.value) {
         is MovieDetailsUiState.Initial -> MovieDetailsLoading(modifier)
-        is MovieDetailsUiState.Success -> MovieDetails(currentState.movieDetails, modifier)
+        is MovieDetailsUiState.Loading ->
+            if (currentState.movieDetails != null) {
+                MovieDetails(
+                    currentState.movieDetails,
+                    isLoading = true,
+                    modifier
+                )
+            } else {
+                MovieDetailsLoading(modifier)
+            }
+
+        is MovieDetailsUiState.Success -> MovieDetails(
+            currentState.movieDetails,
+            isLoading = false,
+            modifier
+        )
+
         is MovieDetailsUiState.Error -> MovieDetailsError(currentState.error)
     }
 }
@@ -48,7 +70,14 @@ internal fun MovieDetailsLoading(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun MovieDetails(movieDetails: MovieDetails, modifier: Modifier = Modifier) {
+internal fun MovieDetails(
+    movieDetails: MovieDetails,
+    isLoading: Boolean,
+    modifier: Modifier = Modifier
+) {
+    if (isLoading) {
+        MovieDetailsLoading(modifier)
+    }
     val isFullScreen = remember { mutableStateOf(false) }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -88,6 +117,7 @@ internal fun MovieDetailsPreview() {
             title = "Titanic",
             overview = "", rating = 3.2f,
             poster = MovieDetails.Poster("", ""),
-        )
+        ),
+        isLoading = false,
     )
 }

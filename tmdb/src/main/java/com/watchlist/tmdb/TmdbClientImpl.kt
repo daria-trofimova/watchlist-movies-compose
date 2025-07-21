@@ -22,6 +22,20 @@ internal class TmdbClientImpl(
                 Result.failure(e)
             }
         }
+
+    override suspend fun getMovie(id: Long): Result<Movie> =
+        withContext(dispatcher) {
+            try {
+                val response = tmdbApi.getMovie(id)
+                if (response.isSuccessful) {
+                    Result.success(response.body()!!)
+                } else {
+                    Result.failure(Exception("Error getting movie: ${response.code()}"))
+                }
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+        }
 }
 
 

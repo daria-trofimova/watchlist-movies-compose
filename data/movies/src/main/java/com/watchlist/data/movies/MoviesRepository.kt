@@ -32,8 +32,23 @@ public class MoviesRepository @Inject constructor(
             }
         }
 
-    // TODO: fetch new data from remote
-    public fun getMovieStream(
+    public fun getMovie(
         id: Long,
-    ): Flow<Movie> = moviesDatabase.moviesDao().loadMovie(id).map { Movie.from(it) }
+    ): Flow<Result<Movie>> = flow {
+        val cachedMovie =
+            moviesDatabase.moviesDao().loadMovie(id).map { Movie.from(it) }.firstOrNull()
+        emit(Result.InProgress(cachedMovie))
+        val result = tmdbClient.getMovie(id)
+        when {
+            result.isSuccess -> {
+                val movie = result.getOrThrow().toDatabaseModel()
+                moviesDatabase.moviesDao().insert(movie)
+                emit(Result.Success(Movie.from(movie)))
+            }
+
+            result.isFailure -> {
+                emit(Result.Error(error = result.exceptionOrNull(), data = cachedMovie))
+            }
+        }
+    }
 }

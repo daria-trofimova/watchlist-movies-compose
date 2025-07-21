@@ -2,9 +2,7 @@ package com.watchlist.feature.moviedetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.watchlist.data.movies.ImagesRepository
-import com.watchlist.data.movies.MoviesRepository
-import com.watchlist.data.movies.model.ImageSize
+import com.watchlist.data.movies.Result
 import com.watchlist.feature.moviedetails.model.MovieDetails
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -17,8 +15,7 @@ import kotlinx.coroutines.launch
 @HiltViewModel(assistedFactory = MovieDetailsViewModel.Factory::class)
 internal class MovieDetailsViewModel @AssistedInject constructor(
     @Assisted private val movieId: Long,
-    private val moviesRepository: MoviesRepository,
-    private val imagesRepository: ImagesRepository,
+    private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<MovieDetailsUiState> =
@@ -27,14 +24,9 @@ internal class MovieDetailsViewModel @AssistedInject constructor(
 
     init {
         viewModelScope.launch {
-            moviesRepository.getMovieStream(id = movieId).collect { movie ->
-                val standardImage = imagesRepository.getImage(movie.posterLink, ImageSize.STANDARD)
-                val highResImage = imagesRepository.getImage(movie.posterLink, ImageSize.HIGH_RES)
-                val poster = MovieDetails.Poster(
-                    standardLink = standardImage.link,
-                    highResLink = highResImage.link
-                )
-                _state.emit(MovieDetailsUiState.Success(MovieDetails.from(movie, poster)))
+            getMovieDetailsUseCase(id = movieId).collect { result ->
+                val state = MovieDetailsUiState.from(result)
+                _state.emit(state)
             }
         }
     }
@@ -47,7 +39,16 @@ internal class MovieDetailsViewModel @AssistedInject constructor(
 
 internal sealed class MovieDetailsUiState {
     class Initial : MovieDetailsUiState()
+    class Loading(val movieDetails: MovieDetails? = null) : MovieDetailsUiState()
     class Success(val movieDetails: MovieDetails) : MovieDetailsUiState()
     class Error(val error: Throwable, val movieDetails: MovieDetails? = null) :
         MovieDetailsUiState()
+
+    companion object {
+        fun from(result: Result<MovieDetails>): MovieDetailsUiState = when (result) {
+            is Result.InProgress -> Loading(result.data)
+            is Result.Success -> Success(result.data)
+            is Result.Error -> Error(result.error ?: UnknownError(), result.data)
+        }
+    }
 }
