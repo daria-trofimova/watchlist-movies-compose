@@ -55,6 +55,7 @@ kotlin {
 }
 
 dependencies {
+    implementation(project(":core:common"))
     implementation(project(":core:ui"))
     implementation(project(":data:movies"))
     implementation(project(":tmdb"))

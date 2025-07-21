@@ -40,6 +40,7 @@ kotlin {
 }
 
 dependencies {
+    implementation(project(":core:common"))
     implementation(project(":tmdb"))
     implementation(project(":database"))
     testImplementation(libs.junit)
