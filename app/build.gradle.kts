@@ -20,8 +20,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        val getLocalProperty = rootProject.ext["getLocalProperty"] as (String, String) -> String
+
         buildConfigField("String", "TMDB_BASE_URL", "\"https://api.themoviedb.org/3/\"")
-        buildConfigField("String", "TMDB_API_KEY", rootProject.extra["TMDB_API_KEY"].toString())
+        buildConfigField("String", "TMDB_API_KEY", getLocalProperty("tmdb.api.key", ""))
         buildConfigField("String", "TMDB_IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/\"")
     }
 

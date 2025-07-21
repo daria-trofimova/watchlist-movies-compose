@@ -1,3 +1,5 @@
+import java.util.Properties
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     alias(libs.plugins.android.application) apply false
@@ -10,14 +12,15 @@ plugins {
     alias(libs.plugins.compose.compiler) apply false
 }
 
-val localProperties = java.util.Properties().apply {
-    file("local.properties").takeIf { it.exists() }?.inputStream()?.use { load(it) }
+fun getLocalProperty(key: String, defaultValue: String = ""): String {
+    val localProperties = Properties()
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        localProperties.load(localPropertiesFile.inputStream())
+    }
+    return localProperties.getProperty(key) ?: defaultValue
 }
 
-val tmdbApiKey: String = localProperties.getProperty("tmdb.api.key")
-val tmdbAccountId: String = localProperties.getProperty("tmdb.account.id")
-
 allprojects {
-    extra["TMDB_API_KEY"] = tmdbApiKey
-    extra["TMDB_ACCOUNT_ID"] = tmdbAccountId
+    ext["getLocalProperty"] = ::getLocalProperty
 }
