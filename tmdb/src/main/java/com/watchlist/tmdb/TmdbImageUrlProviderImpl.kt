@@ -1,5 +1,7 @@
 package com.watchlist.tmdb
 
+import com.watchlist.tmdb.model.TmdbImageSize
+
 /**
  *  [Api documentation](https://developer.themoviedb.org/docs/image-basics)
  * */

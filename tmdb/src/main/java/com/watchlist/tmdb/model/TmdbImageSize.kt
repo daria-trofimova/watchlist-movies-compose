@@ -1,4 +1,4 @@
-package com.watchlist.tmdb
+package com.watchlist.tmdb.model
 
 public enum class TmdbImageSize(public val value: String) {
     W300("w300"),

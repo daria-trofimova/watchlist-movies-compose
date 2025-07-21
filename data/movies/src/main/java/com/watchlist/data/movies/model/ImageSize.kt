@@ -1,6 +1,6 @@
 package com.watchlist.data.movies.model
 
-import com.watchlist.tmdb.TmdbImageSize
+import com.watchlist.tmdb.model.TmdbImageSize
 
 public enum class ImageSize {
     PREVIEW,
