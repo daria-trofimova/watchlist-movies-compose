@@ -33,9 +33,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
-        freeCompilerArgs += listOf(
-            "-Xwhen-guards"
-        )
     }
 }
 
